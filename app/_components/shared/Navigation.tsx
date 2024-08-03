@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { FC } from "react";
 import { Orbit } from "lucide-react";
 import ThemeSwitch from "./ThemeSwitch";
+import Link from "next/link";
 
 const Navigation: FC = () => {
   const scrolled = useScrollTop();
@@ -21,7 +22,12 @@ const Navigation: FC = () => {
           Collab <Orbit className="ml-2 size-8" />
         </div>
         <div className="ml-auto">
-          <Button variant={"default"}>Get Started</Button>
+        <Button variant={"secondary"}>
+            <Link href="/sign-up">Login</Link>
+          </Button>
+          <Button className="ml-3" variant={"default"}>
+            <Link href="/sign-up">Register</Link>
+          </Button>
         </div>
         <div className="ml-4">
         <ThemeSwitch />
