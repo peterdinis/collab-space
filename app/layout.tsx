@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ThemeProvider>
+        <ThemeProvider attribute="dark">
           <Navigation />
           {children}
         </ThemeProvider>
