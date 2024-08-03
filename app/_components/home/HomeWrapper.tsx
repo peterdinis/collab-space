@@ -2,6 +2,7 @@ import { File, ArrowRight } from "lucide-react";
 import { FC } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { Footer } from "../shared/Footer";
 
 const HomeWrapper: FC = () => {
   return (
@@ -42,6 +43,7 @@ const HomeWrapper: FC = () => {
           </main>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
