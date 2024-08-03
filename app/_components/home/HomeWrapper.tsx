@@ -30,7 +30,7 @@ const HomeWrapper: FC = () => {
               . Together.
             </h1>
             <h3 className="text-base mt-10 font-medium sm:text-xl md:text-2xl">
-              Notion is the connected workspace where <br />
+              Collab Orbit is the connected workspace where <br />
               better, faster work happens.
             </h3>
 
