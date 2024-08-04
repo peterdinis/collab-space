@@ -1,22 +1,22 @@
-"use client"
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export default function useScrollTop(threshold: number = 10): boolean {
-  const [scrolled, setScrolled] = useState<boolean>(false);
+    const [scrolled, setScrolled] = useState<boolean>(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > threshold;
-      if (isScrolled !== scrolled) {
-        setScrolled(isScrolled);
-      }
-    };
+    useEffect(() => {
+        const handleScroll = () => {
+            const isScrolled = window.scrollY > threshold;
+            if (isScrolled !== scrolled) {
+                setScrolled(isScrolled);
+            }
+        };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+        window.addEventListener('scroll', handleScroll, { passive: true });
 
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [threshold]);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [threshold]);
 
-  return scrolled;
+    return scrolled;
 }

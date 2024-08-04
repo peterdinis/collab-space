@@ -1,11 +1,7 @@
-import { NextPage } from "next";
+import { NextPage } from 'next';
 
 const DashboardPage: NextPage = () => {
-    return (
-        <>
-            DASHBOARD
-        </>
-    )
-}
+    return <>DASHBOARD</>;
+};
 
-export default DashboardPage
+export default DashboardPage;
