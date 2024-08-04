@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Bell, Home, LineChart, Package, Package2, Search, ShoppingCart, Users } from "lucide-react"
+import { Bell, Home, LineChart, Package, Package2, ShoppingCart, Users } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
