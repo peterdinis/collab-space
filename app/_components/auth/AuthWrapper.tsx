@@ -8,7 +8,7 @@ const AuthWrapper: FC<IAuthWrapperProps> = ({
     children,
 }: IAuthWrapperProps) => {
     return (
-        <div className='mt-10 flex justify-center align-top'>{children}</div>
+        <div className='mt-20 flex justify-center align-top'>{children}</div>
     );
 };
 
