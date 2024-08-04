@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { ClerkProvider } from "@clerk/nextjs";
-import { FC, ReactNode } from "react";
+import { ClerkProvider } from '@clerk/nextjs';
+import { FC, ReactNode } from 'react';
 
 interface IClerkAppProviderProps {
-  children?: ReactNode;
+    children?: ReactNode;
 }
 
 const ClerkAppProvider: FC<IClerkAppProviderProps> = ({
-  children,
+    children,
 }: IClerkAppProviderProps) => {
-  return <ClerkProvider>{children}</ClerkProvider>;
+    return <ClerkProvider>{children}</ClerkProvider>;
 };
 
 export default ClerkAppProvider;
