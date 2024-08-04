@@ -7,9 +7,12 @@ import { FC } from "react";
 import { Orbit } from "lucide-react";
 import ThemeSwitch from "./ThemeSwitch";
 import Link from "next/link";
+import ProfileDropdown from "../auth/ProfileDropdown";
+import { useUser } from "@clerk/nextjs";
 
 const Navigation: FC = () => {
   const scrolled = useScrollTop();
+  const { user } = useUser();
   return (
     <div
       className={cn(
@@ -22,15 +25,21 @@ const Navigation: FC = () => {
           Collab <Orbit className="ml-2 size-8" />
         </div>
         <div className="ml-auto">
-        <Button variant={"secondary"}>
-            <Link href="/sign-up">Login</Link>
-          </Button>
-          <Button className="ml-3" variant={"default"}>
-            <Link href="/sign-up">Register</Link>
-          </Button>
+          {user ? (
+            <ProfileDropdown />
+          ) : (
+            <>
+              <Button variant={"secondary"}>
+                <Link href="/sign-in">Login</Link>
+              </Button>
+              <Button className="ml-3" variant={"default"}>
+                <Link href="/sign-up">Register</Link>
+              </Button>
+            </>
+          )}
         </div>
         <div className="ml-4">
-        <ThemeSwitch />
+          <ThemeSwitch />
         </div>
       </div>
     </div>

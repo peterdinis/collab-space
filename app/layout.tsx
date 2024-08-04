@@ -4,6 +4,7 @@ import "./globals.css";
 import Navigation from "./_components/shared/Navigation";
 import ThemeProvider from "./_components/shared/providers/ThemeProvider";
 import ClerkAppProvider from "./_components/shared/providers/ClerkAppProvider";
+import { Toaster } from "@/components/ui/toaster"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
           <ClerkAppProvider>
             <Navigation />
             {children}
+            <Toaster />
           </ClerkAppProvider>
         </ThemeProvider>
       </body>
