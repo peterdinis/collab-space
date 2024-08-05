@@ -35,7 +35,7 @@ const ProfileDropdown: FC = () => {
                     <Button
                         onClick={() => {
                             signOut({
-                                redirectUrl: '/sign-in',
+                                redirectUrl: '/',
                             });
                             toast({
                                 title: 'Successfully logged out',
