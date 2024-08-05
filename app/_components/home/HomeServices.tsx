@@ -1,7 +1,5 @@
 import React from "react";
 import { LucideIcon } from "lucide-react";
-
-// Example icons from lucide-react
 import { Cannabis, Shuffle, Camera, Award } from "lucide-react";
 
 // Define the service type
@@ -15,27 +13,27 @@ interface Service {
 const serviceList: Service[] = [
   {
     icon: Cannabis,
-    title: "Product Design",
+    title: "Team Collaboration",
     description:
-      "Banks likewise put away cash to develop their hold of cash. What they do is directed by laws. Those laws vary in various nations",
+      "Our platform provides robust tools for seamless team collaboration. Engage with your colleagues in real-time.",
   },
   {
     icon: Shuffle,
-    title: "Content Marketing",
+    title: "Project Management",
     description:
-      "Banks likewise put away cash to develop their hold of cash. What they do is directed by laws. Those laws vary in various nations",
+      "Manage your projects efficiently with our integrated tools, ensuring every team member is on the same page.",
   },
   {
     icon: Camera,
-    title: "Digital Strategy",
+    title: "Communication Tools",
     description:
-      "Banks likewise put away cash to develop their hold of cash. What they do is directed by laws. Those laws vary in various nations",
+      "Utilize our advanced communication tools to stay connected with your team, no matter where you are.",
   },
   {
     icon: Award,
-    title: "Get your documentation",
+    title: "Resource Sharing",
     description:
-      "Banks likewise put away cash to develop their hold of cash. What they do is directed by laws. Those laws vary in various nations",
+      "Share resources effortlessly with your team. Our platform ensures secure and easy access to all your important files.",
   },
 ];
 
@@ -88,7 +86,7 @@ const ShapeOne: React.FC = () => {
       />
     </svg>
   );
-}
+};
 
 const ShapeTwo: React.FC = () => {
   return (
@@ -103,7 +101,7 @@ const ShapeTwo: React.FC = () => {
       <circle cx="389" cy="389" r="389" fill="#0d6efd" fillOpacity="0.19" />
     </svg>
   );
-}
+};
 
 const HomeServices: React.FC = () => {
   return (
@@ -115,11 +113,11 @@ const HomeServices: React.FC = () => {
         <div className="grid grid-cols-12 gap-6">
           <div className="col-span-12 md:col-span-4">
             <h2 className="text-3xl md:text-[40px] font-bold leading-normal mb-4">
-              The Best Stories are told in the desert. What Noman known for...
+              Collaborate Seamlessly with Your Team
             </h2>
-            <p className="text-[17px] z-50 prose prose-p: font-bold leading-normal opacity-80">
-              An activity that requires a person's mental or physical effort is
-              work.If a person is trained for a certain type physical effort.
+            <p className="text-[17px] font-bold leading-normal opacity-80">
+              Empower your team to work together efficiently with our advanced collaboration tools. 
+              From project management to real-time communication, we have everything you need to succeed.
             </p>
           </div>
           <div className="col-span-12 md:col-span-8">
@@ -131,7 +129,6 @@ const HomeServices: React.FC = () => {
                   </div>
                 ))}
               </div>
-
               <div className="col-span-2 md:col-span-1 md:mt-12">
                 {serviceList.slice(2, 4).map((service, i) => (
                   <div key={i}>
