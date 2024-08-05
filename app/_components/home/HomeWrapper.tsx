@@ -13,8 +13,8 @@ const HomeWrapper: FC = () => {
 			<div className="container px-4 mx-auto relative">
 				<div className="grid grid-cols-12 gap-y-6 lg:gap-x-6">
 					<div className="col-span-12 lg:col-span-6 xl:pr-12 text-center lg:text-start">
-						<div className="flex flex-col justify-center h-full">
-							<h2 className="text-3xl ml-4 prose prose-h2: dark:text-white md:text-[70px] md:leading-[85px] font-bold mb-4">
+						<div className="flex flex-col mt-12 justify-center h-full">
+							<h2 className="text-5xl ml-4 prose prose-h2: dark:text-white md:text-[70px] md:leading-[85px] font-bold mb-4">
 								Collab Space
 							</h2>
 							<p className="text-[22px] ml-4 prose prose-p: dark:text-white leading-normal opacity-80">
