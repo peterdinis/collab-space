@@ -25,11 +25,11 @@ const Sidebar = () => {
               <Home className="h-5 w-5" />
               Dashboard
             </Link>
-            <Link href="/teams" className="flex font-bold text-xl items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted">
+            <Link href="/teams" className="flex mt-5 font-bold text-xl items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted">
               <Users className="h-5 w-5"  />
               Teams
             </Link>
-            <Link href="#" className="flex font-bold text-xl items-center gap-3 rounded-lg px-3 py-2 text-primary transition-all hover:text-primary hover:bg-muted">
+            <Link href="/workspaces" className="flex mt-5 font-bold text-xl items-center gap-3 rounded-lg px-3 py-2 text-primary transition-all hover:text-primary hover:bg-muted">
               <Package className="h-5 w-5"  />
               Workspaces
             </Link>
