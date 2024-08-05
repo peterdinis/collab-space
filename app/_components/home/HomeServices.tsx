@@ -117,7 +117,7 @@ const HomeServices: React.FC = () => {
             <h2 className="text-3xl md:text-[40px] font-bold leading-normal mb-4">
               The Best Stories are told in the desert. What Noman known for...
             </h2>
-            <p className="text-[17px] leading-normal opacity-80">
+            <p className="text-[17px] z-50 prose prose-p: font-bold leading-normal opacity-80">
               An activity that requires a person's mental or physical effort is
               work.If a person is trained for a certain type physical effort.
             </p>
