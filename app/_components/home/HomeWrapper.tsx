@@ -2,6 +2,8 @@ import { FC } from "react";
 import { Shape1, Shape2 } from "./Shapes";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Image from "next/image";
+import mainImage from "@/public/img/mainImage.png"
 
 const HomeWrapper: FC = () => {
   return (
@@ -32,9 +34,11 @@ const HomeWrapper: FC = () => {
 					<div className="col-span-12 lg:col-span-6 flex items-center justify-center relative pb-6">
 						<Shape2 />
 
-						<img
-							src="https://cdn.easyfrontend.com/pictures/cards-1.png"
-							alt=""
+						<Image
+							src={mainImage}
+							alt="Main Image"
+              width={600}
+              height={600}
 							className="rounded max-w-full h-auto relative"
 						/>
 					</div>
