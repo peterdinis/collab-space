@@ -13,8 +13,6 @@ import { Button } from '@/components/ui/button';
 const ThemeSwitch: FC = () => {
     const { theme, setTheme } = useTheme();
 
-    console.log('Current theme:', theme);
-
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -31,7 +29,6 @@ const ThemeSwitch: FC = () => {
             <DropdownMenuContent align='end'>
                 <DropdownMenuItem
                     onClick={() => {
-                        console.log('Setting theme to light');
                         setTheme('light');
                     }}
                 >
@@ -39,7 +36,6 @@ const ThemeSwitch: FC = () => {
                 </DropdownMenuItem>
                 <DropdownMenuItem
                     onClick={() => {
-                        console.log('Setting theme to dark');
                         setTheme('dark');
                     }}
                 >
@@ -47,7 +43,6 @@ const ThemeSwitch: FC = () => {
                 </DropdownMenuItem>
                 <DropdownMenuItem
                     onClick={() => {
-                        console.log('Setting theme to system');
                         setTheme('system');
                     }}
                 >
