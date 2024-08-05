@@ -9,6 +9,7 @@ import ThemeSwitch from './ThemeSwitch';
 import Link from 'next/link';
 import ProfileDropdown from '../auth/ProfileDropdown';
 import { useUser } from '@clerk/nextjs';
+import { SignInButton } from '@clerk/nextjs';
 
 const Navigation: FC = () => {
     const scrolled = useScrollTop();
@@ -29,12 +30,13 @@ const Navigation: FC = () => {
                         <ProfileDropdown />
                     ) : (
                         <>
-                            <Button variant={'destructive'}>
-                                <Link href='/sign-in'>Login</Link>
-                            </Button>
-                            <Button className='ml-3' variant={'default'}>
-                                <Link href='/sign-up'>Register</Link>
-                            </Button>
+                            <SignInButton
+                                mode='modal'
+                                fallbackRedirectUrl={'/dashboard'}
+                                signUpForceRedirectUrl={'/sign-up'}
+                            >
+                                <Button variant={'default'}>Sign In</Button>
+                            </SignInButton>
                         </>
                     )}
                 </div>
