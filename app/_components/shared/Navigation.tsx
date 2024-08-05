@@ -29,7 +29,7 @@ const Navigation: FC = () => {
                         <ProfileDropdown />
                     ) : (
                         <>
-                            <Button variant={'secondary'}>
+                            <Button variant={'destructive'}>
                                 <Link href='/sign-in'>Login</Link>
                             </Button>
                             <Button className='ml-3' variant={'default'}>
