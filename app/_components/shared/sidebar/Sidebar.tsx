@@ -9,8 +9,6 @@ import { useUser } from "@clerk/nextjs"
 const Sidebar = () => {
   const { user } = useUser();
 
-  console.log("U", user);
-
   return (
     <div className="hidden border-r pt-20 bg-muted/40 md:block">
       <div className="flex h-full max-h-screen flex-col gap-2">
