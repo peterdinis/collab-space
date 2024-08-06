@@ -7,13 +7,13 @@ import { FC } from 'react';
 import { Orbit } from 'lucide-react';
 import ThemeSwitch from './ThemeSwitch';
 import Link from 'next/link';
+import { useAuth } from '@/app/_context/AuthContext';
 import ProfileDropdown from '../auth/ProfileDropdown';
-import { useUser } from '@clerk/nextjs';
-import { SignInButton } from '@clerk/nextjs';
 
 const Navigation: FC = () => {
     const scrolled = useScrollTop();
-    const { user } = useUser();
+    const { currentUser } = useAuth();
+
     return (
         <div
             className={cn(
@@ -26,17 +26,20 @@ const Navigation: FC = () => {
                     Collab <Orbit className='ml-2 size-8' />
                 </div>
                 <div className='ml-auto'>
-                    {user ? (
+                    {currentUser ? (
                         <ProfileDropdown />
                     ) : (
                         <>
-                            <SignInButton
-                                mode='modal'
-                                fallbackRedirectUrl={'/dashboard'}
-                                signUpForceRedirectUrl={'/sign-up'}
+                            <Button variant={'default'} size={'lg'}>
+                                <Link href='/register'>Register</Link>
+                            </Button>
+                            <Button
+                                variant={'secondary'}
+                                className='ml-4'
+                                size={'lg'}
                             >
-                                <Button variant={'default'}>Sign In</Button>
-                            </SignInButton>
+                                <Link href='/login'>Login</Link>
+                            </Button>
                         </>
                     )}
                 </div>

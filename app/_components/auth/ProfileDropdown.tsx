@@ -1,3 +1,5 @@
+'use client';
+
 import { FC } from 'react';
 import {
     DropdownMenu,
@@ -7,50 +9,43 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { User } from 'lucide-react';
-import { useUser, useClerk } from '@clerk/nextjs';
-import { Button } from '@/components/ui/button';
+import { useAuth } from '@/app/_context/AuthContext';
+import { useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
+import { Button } from '@/components/ui/button';
 
 const ProfileDropdown: FC = () => {
-    const { user } = useUser();
-    const { signOut } = useClerk();
+    const { currentUser, logout } = useAuth();
     const { toast } = useToast();
 
+    const router = useRouter();
+
+    const logoutFromApp = () => {
+        logout();
+        toast({
+            title: 'Succesfully logged out',
+            duration: 2000,
+            className: 'bg-green-800 text-white font-bold',
+        });
+        router.push('/');
+    };
+
     return (
-        <DropdownMenu>
-            <DropdownMenuTrigger>
-                <Avatar>
-                    <AvatarImage src={user?.imageUrl} />
-                    <AvatarFallback>
-                        <User />
-                    </AvatarFallback>
-                </Avatar>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-                <DropdownMenuLabel>{user?.fullName}</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                    <Button
-                        onClick={() => {
-                            signOut({
-                                redirectUrl: '/',
-                            });
-                            toast({
-                                title: 'Successfully logged out',
-                                duration: 2000,
-                                className: 'bg-green-600 text-white font-bold',
-                            });
-                        }}
-                        variant={'ghost'}
-                        size={'sm'}
-                    >
+        <>
+            <DropdownMenu>
+                <DropdownMenuTrigger>
+                    <Button className='font-bold text-xl' variant={"ghost"} size={"lg"}>Menu</Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>{currentUser?.email}</DropdownMenuItem>
+                    <DropdownMenuItem onClick={logoutFromApp}>
                         Logout
-                    </Button>
-                </DropdownMenuItem>
-            </DropdownMenuContent>
-        </DropdownMenu>
+                    </DropdownMenuItem>
+                </DropdownMenuContent>
+            </DropdownMenu>
+        </>
     );
 };
 
