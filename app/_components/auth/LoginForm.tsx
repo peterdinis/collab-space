@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import {
@@ -10,8 +12,41 @@ import {
 import { Input } from "@/components/ui/input"
 import { FC } from "react"
 import { Label } from "@/components/ui/label"
+import { useForm, SubmitHandler } from "react-hook-form"
+import { useAuth } from "@/app/_context/AuthContext"
+import { useToast } from "@/components/ui/use-toast"
+import { useRouter } from "next/navigation"
+
+interface LoginFormInputs {
+  email: string;
+  password: string;
+}
 
 const LoginForm: FC = () => {
+  const { register, handleSubmit } = useForm<LoginFormInputs>();
+  const { login } = useAuth();
+  const { toast } = useToast();
+  const router = useRouter();
+
+  const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
+    try {
+      await login(data.email, data.password);
+      toast({
+        title: "Login successful",
+        duration: 2000,
+        className: "bg-green-700 text-white font-bold"
+      });
+      router.push("/dashboard");
+    } catch (error) {
+      toast({
+        title: "Login failed",
+        duration: 2000,
+        className: "bg-red-700 text-white font-bold"
+      });
+      console.error("Login error:", error);
+    }
+  };
+
   return (
     <Card className="mx-auto max-w-sm">
       <CardHeader>
@@ -21,41 +56,47 @@ const LoginForm: FC = () => {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="grid gap-4">
-          <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="m@example.com"
-              required
-            />
-          </div>
-          <div className="grid gap-2">
-            <div className="flex items-center">
-              <Label htmlFor="password">Password</Label>
-              <Link href="#" className="ml-auto inline-block text-sm underline">
-                Forgot your password?
-              </Link>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="grid gap-4">
+            <div className="grid gap-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="m@example.com"
+                {...register("email", { required: true })}
+              />
             </div>
-            <Input id="password" type="password" required />
+            <div className="grid gap-2">
+              <div className="flex items-center">
+                <Label htmlFor="password">Password</Label>
+                <Link href="#" className="ml-auto inline-block text-sm underline">
+                  Forgot your password?
+                </Link>
+              </div>
+              <Input
+                id="password"
+                type="password"
+                {...register("password", { required: true })}
+              />
+            </div>
+            <Button type="submit" className="w-full">
+              Login
+            </Button>
+            <Button variant="outline" className="w-full">
+              Login with Google
+            </Button>
           </div>
-          <Button type="submit" className="w-full">
-            Login
-          </Button>
-          <Button variant="outline" className="w-full">
-            Login with Google
-          </Button>
-        </div>
-        <div className="mt-4 text-center text-sm">
-          Don&apos;t have an account?{" "}
-          <Link href="#" className="underline">
-            Sign up
-          </Link>
-        </div>
+          <div className="mt-4 text-center text-sm">
+            Don&apos;t have an account?{" "}
+            <Link href="#" className="underline">
+              Sign up
+            </Link>
+          </div>
+        </form>
       </CardContent>
     </Card>
-  )
+  );
 }
 
 export default LoginForm;

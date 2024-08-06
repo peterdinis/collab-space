@@ -1,34 +1,25 @@
 'use client';
 
-import {
-    FC,
-    ReactNode,
-    createContext,
-    useContext,
-    useState,
-    useEffect,
-} from 'react';
-import {
-    onAuthStateChanged,
-    signOut,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    User,
-} from 'firebase/auth';
+import { FC, ReactNode, createContext, useContext, useState, useEffect } from 'react';
+import { onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, User } from 'firebase/auth';
 import { auth } from '../_firebase/init';
 
 interface AuthContextType {
     currentUser: User | null;
     register: (email: string, password: string) => Promise<void>;
     login: (email: string, password: string) => Promise<void>;
-    /*  signInWithGoogle: () => Promise<void>; */ // TODO: Later
+    // signInWithGoogle: () => Promise<void>; // TODO: Later
     logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const useAuth = () => {
-    return useContext(AuthContext);
+export const useAuth = (): AuthContextType => {
+    const context = useContext(AuthContext);
+    if (context === undefined) {
+        throw new Error('useAuth must be used within an AuthProvider');
+    }
+    return context;
 };
 
 export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
@@ -58,29 +49,31 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
     };
 
     // TODO: Later
-    /*  const signInWithGoogle = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      const result = await signInWithPopup(auth, provider);
-      return result
-    } catch (error) {
-      console.error("Error signing in with Google:", (error as Error).message);
-    }
-  }; */
+    /* const signInWithGoogle = async () => {
+        const provider = new GoogleAuthProvider();
+        try {
+            const result = await signInWithPopup(auth, provider);
+            return result;
+        } catch (error) {
+            console.error('Error signing in with Google:', (error as Error).message);
+        }
+    }; */
 
     const logout = async () => {
-        await signOut(auth);
+        try {
+            await signOut(auth);
+        } catch (error) {
+            console.error('Error signing out:', (error as Error).message);
+        }
     };
 
-    const value = {
+    const value: AuthContextType = {
         currentUser,
         register,
         login,
-        /* signInWithGoogle, */ // TODO: Later
+        // signInWithGoogle, // TODO: Later
         logout,
     };
 
-    return (
-        <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
-    );
+    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
