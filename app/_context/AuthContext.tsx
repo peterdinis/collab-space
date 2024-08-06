@@ -1,7 +1,20 @@
 'use client';
 
-import { FC, ReactNode, createContext, useContext, useState, useEffect } from 'react';
-import { onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, User } from 'firebase/auth';
+import {
+    FC,
+    ReactNode,
+    createContext,
+    useContext,
+    useState,
+    useEffect,
+} from 'react';
+import {
+    onAuthStateChanged,
+    signOut,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    User,
+} from 'firebase/auth';
 import { auth } from '../_firebase/init';
 
 interface AuthContextType {
@@ -75,5 +88,7 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
         logout,
     };
 
-    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+    return (
+        <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+    );
 };

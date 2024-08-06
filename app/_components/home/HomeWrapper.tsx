@@ -1,51 +1,52 @@
-import { FC } from "react";
-import { Shape1, Shape2 } from "./Shapes";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import Image from "next/image";
-import mainImage from "@/public/img/mainImage.png"
+import { FC } from 'react';
+import { Shape1, Shape2 } from './Shapes';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import Image from 'next/image';
+import mainImage from '@/public/img/mainImage.png';
 
 const HomeWrapper: FC = () => {
-  return (
-    <section className="light py-14 md:py-24 bg-white dark:bg-background text-zinc-900 dark:text-white relative overflow-hidden z-10">
-			<Shape1 />
+    return (
+        <section className='light relative z-10 overflow-hidden bg-white py-14 text-zinc-900 dark:bg-background dark:text-white md:py-24'>
+            <Shape1 />
 
-			<div className="container px-4 mx-auto relative">
-				<div className="grid grid-cols-12 gap-y-6 lg:gap-x-6">
-					<div className="col-span-12 lg:col-span-6 xl:pr-12 text-center lg:text-start">
-						<div className="flex flex-col mt-12 justify-center h-full">
-							<h2 className="text-5xl ml-4 prose prose-h2: dark:text-white md:text-[70px] md:leading-[85px] font-bold mb-4">
-								Collab Space
-							</h2>
-							<p className="text-[22px] ml-4 prose prose-p: dark:text-white leading-normal opacity-80">
-								Unique themes and templates for every budget and every project.
-								Take a look and find the right one for you!
-							</p>
-							<div>
-								<Link
-									href="/sign-in"
-									className="rounded py-3 px-8 hover:bg-opacity-90 duration-300 text-white text-xl inline-flex mt-6 md:mt-12"
-								>
-									<Button size={"lg"}>Try Now</Button>
-								</Link>
-							</div>
-						</div>
-					</div>
-					<div className="col-span-12 lg:col-span-6 flex items-center justify-center relative pb-6">
-						<Shape2 />
+            <div className='container relative mx-auto px-4'>
+                <div className='grid grid-cols-12 gap-y-6 lg:gap-x-6'>
+                    <div className='col-span-12 text-center lg:col-span-6 lg:text-start xl:pr-12'>
+                        <div className='mt-12 flex h-full flex-col justify-center'>
+                            <h2 className='prose-h2: prose mb-4 ml-4 text-5xl font-bold dark:text-white md:text-[70px] md:leading-[85px]'>
+                                Collab Space
+                            </h2>
+                            <p className='prose-p: prose ml-4 text-[22px] leading-normal opacity-80 dark:text-white'>
+                                Unique themes and templates for every budget and
+                                every project. Take a look and find the right
+                                one for you!
+                            </p>
+                            <div>
+                                <Link
+                                    href='/sign-in'
+                                    className='mt-6 inline-flex rounded px-8 py-3 text-xl text-white duration-300 hover:bg-opacity-90 md:mt-12'
+                                >
+                                    <Button size={'lg'}>Try Now</Button>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='relative col-span-12 flex items-center justify-center pb-6 lg:col-span-6'>
+                        <Shape2 />
 
-						<Image
-							src={mainImage}
-							alt="Main Image"
-              width={600}
-              height={600}
-							className="rounded max-w-full h-auto relative"
-						/>
-					</div>
-				</div>
-			</div>
-		</section>
-  );
+                        <Image
+                            src={mainImage}
+                            alt='Main Image'
+                            width={600}
+                            height={600}
+                            className='relative h-auto max-w-full rounded'
+                        />
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
 };
 
 export default HomeWrapper;
