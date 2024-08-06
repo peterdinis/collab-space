@@ -6,6 +6,7 @@ import ThemeProvider from './_components/shared/providers/ThemeProvider';
 import ClerkAppProvider from './_components/shared/providers/ClerkAppProvider';
 import { Toaster } from '@/components/ui/toaster';
 import ScrollToTop from './_components/shared/ScrollToTop';
+import { AuthProvider } from './_context/AuthContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -24,14 +25,15 @@ export default function RootLayout({
             <body className={inter.className}>
                 <ThemeProvider attribute='class'>
                     <ClerkAppProvider>
-                        <Navigation />
-                        {children}
-                        <ScrollToTop />
-                        <Toaster />
+                        <AuthProvider>
+                            <Navigation />
+                            {children}
+                            <ScrollToTop />
+                            <Toaster />
+                        </AuthProvider>
                     </ClerkAppProvider>
                 </ThemeProvider>
             </body>
         </html>
     );
 }
- 

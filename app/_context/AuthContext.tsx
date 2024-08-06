@@ -1,0 +1,78 @@
+"use client"
+
+import { FC, ReactNode, createContext, useContext, useState, useEffect } from "react";
+import { 
+  onAuthStateChanged, 
+  signOut, 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword, 
+  signInWithPopup, 
+  GoogleAuthProvider, 
+  User 
+} from "firebase/auth";
+import { auth } from "../_firebase/init";
+
+interface AuthContextType {
+  currentUser: User | null;
+  register: (email: string, password: string) => Promise<void>;
+  login: (email: string, password: string) => Promise<void>;
+  signInWithGoogle: () => Promise<void>;
+  logout: () => Promise<void>;
+}
+
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
+
+export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+    });
+    return unsubscribe;
+  }, []);
+
+  const register = async (email: string, password: string) => {
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      console.error("Error registering:", (error as Error).message);
+    }
+  };
+
+  const login = async (email: string, password: string) => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      console.error("Error logging in:", (error as Error).message);
+    }
+  };
+
+  const signInWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      return result
+    } catch (error) {
+      console.error("Error signing in with Google:", (error as Error).message);
+    }
+  };
+
+  const logout = async () => {
+    await signOut(auth);
+  };
+
+  const value = {
+    currentUser,
+    register,
+    login,
+    signInWithGoogle,
+    logout,
+  } as any;
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+};
