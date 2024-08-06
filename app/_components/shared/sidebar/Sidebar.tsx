@@ -10,17 +10,14 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-import { useUser } from '@clerk/nextjs';
 
 const Sidebar = () => {
-    const { user } = useUser();
-
     return (
         <div className='hidden border-r bg-muted/40 pt-20 md:block'>
             <div className='flex h-full max-h-screen flex-col gap-2'>
                 <div className='flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6'>
                     <div className='flex items-center gap-2 font-semibold'>
-                        <span>Welcome {user?.fullName}</span>
+                        <span>Welcome ABCABC</span>
                     </div>
                 </div>
                 <div className='flex-1'>
