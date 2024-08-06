@@ -12,6 +12,7 @@ import {
 import { useAuth } from '@/app/_context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
+import { Button } from '@/components/ui/button';
 
 const ProfileDropdown: FC = () => {
     const { currentUser, logout } = useAuth();
@@ -32,7 +33,9 @@ const ProfileDropdown: FC = () => {
     return (
         <>
             <DropdownMenu>
-                <DropdownMenuTrigger>Menu</DropdownMenuTrigger>
+                <DropdownMenuTrigger>
+                    <Button className='font-bold text-xl' variant={"ghost"} size={"lg"}>Menu</Button>
+                </DropdownMenuTrigger>
                 <DropdownMenuContent>
                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
                     <DropdownMenuSeparator />
