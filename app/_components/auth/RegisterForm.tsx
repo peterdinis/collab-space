@@ -10,13 +10,14 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Label } from '@/components/ui/label';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useAuth } from '@/app/_context/AuthContext';
 import { useToast } from '@/components/ui/use-toast';
 import { useRouter } from 'next/navigation';
 import AuthWrapper from './AuthWrapper';
+import { Eye, EyeOff } from 'lucide-react';
 
 interface RegisterFormInputs {
     email: string;
@@ -28,6 +29,7 @@ const RegisterForm: FC = () => {
     const { register: registerUser } = useAuth();
     const { toast } = useToast();
     const router = useRouter();
+    const [showPassword, setShowPassword] = useState(false);
 
     const onSubmit: SubmitHandler<RegisterFormInputs> = async (data) => {
         try {
@@ -71,13 +73,23 @@ const RegisterForm: FC = () => {
                             </div>
                             <div className='grid gap-2'>
                                 <Label htmlFor='password'>Password</Label>
-                                <Input
-                                    id='password'
-                                    type='password'
-                                    {...register('password', {
-                                        required: true,
-                                    })}
-                                />
+                                <div className='relative'>
+                                    <Input
+                                        id='password'
+                                        type={showPassword ? 'text' : 'password'}
+                                        {...register('password', {
+                                            required: true,
+                                        })}
+                                    />
+                                    <Button
+                                        type='button'
+                                        variant={"ghost"}
+                                        className='absolute inset-y-0 right-0 flex items-center px-2'
+                                        onClick={() => setShowPassword(!showPassword)}
+                                    >
+                                        {showPassword ? <EyeOff /> : <Eye />}
+                                    </Button>
+                                </div>
                             </div>
                             <Button type='submit' className='w-full'>
                                 Register
