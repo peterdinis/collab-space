@@ -3,7 +3,6 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import Navigation from './_components/shared/Navigation';
 import ThemeProvider from './_components/shared/providers/ThemeProvider';
-import ClerkAppProvider from './_components/shared/providers/ClerkAppProvider';
 import { Toaster } from '@/components/ui/toaster';
 import ScrollToTop from './_components/shared/ScrollToTop';
 import { AuthProvider } from './_context/AuthContext';
@@ -24,14 +23,12 @@ export default function RootLayout({
         <html lang='en'>
             <body className={inter.className}>
                 <ThemeProvider attribute='class'>
-                    <ClerkAppProvider>
-                        <AuthProvider>
-                            <Navigation />
-                            {children}
-                            <ScrollToTop />
-                            <Toaster />
-                        </AuthProvider>
-                    </ClerkAppProvider>
+                    <AuthProvider>
+                        <Navigation />
+                        {children}
+                        <ScrollToTop />
+                        <Toaster />
+                    </AuthProvider>
                 </ThemeProvider>
             </body>
         </html>
