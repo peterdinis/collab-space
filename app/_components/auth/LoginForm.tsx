@@ -16,6 +16,7 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import { useAuth } from "@/app/_context/AuthContext"
 import { useToast } from "@/components/ui/use-toast"
 import { useRouter } from "next/navigation"
+import AuthWrapper from "./AuthWrapper"
 
 interface LoginFormInputs {
   email: string;
@@ -48,7 +49,8 @@ const LoginForm: FC = () => {
   };
 
   return (
-    <Card className="mx-auto max-w-sm">
+    <AuthWrapper>
+      <Card className="mx-auto max-w-sm">
       <CardHeader>
         <CardTitle className="text-2xl">Login</CardTitle>
         <CardDescription>
@@ -96,6 +98,7 @@ const LoginForm: FC = () => {
         </form>
       </CardContent>
     </Card>
+    </AuthWrapper>
   );
 }
 

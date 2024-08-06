@@ -14,6 +14,7 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import { useAuth } from "@/app/_context/AuthContext";
 import { useToast } from "@/components/ui/use-toast"
 import { useRouter } from "next/navigation"
+import AuthWrapper from "./AuthWrapper"
 
 interface RegisterFormInputs {
   email: string;
@@ -22,7 +23,7 @@ interface RegisterFormInputs {
 
 const RegisterForm: FC = () => {
   const { register, handleSubmit } = useForm<RegisterFormInputs>();
-  const { register: registerUser } = useAuth();
+  const { register: registerUser} = useAuth();
   const {toast} = useToast();
   const router = useRouter();
 
@@ -46,7 +47,8 @@ const RegisterForm: FC = () => {
   };
 
   return (
-    <Card className="mx-auto max-w-sm">
+   <AuthWrapper>
+     <Card className="mx-auto max-w-sm">
       <CardHeader>
         <CardTitle className="text-2xl">Register</CardTitle>
         <CardDescription>
@@ -86,6 +88,7 @@ const RegisterForm: FC = () => {
         </form>
       </CardContent>
     </Card>
+   </AuthWrapper>
   );
 }
 
