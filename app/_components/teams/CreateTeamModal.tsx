@@ -34,9 +34,16 @@ const CreateTeamModal: FC = () => {
         },
     });
 
+    const {toast} = useToast();
+
     function onSubmit(values: z.infer<typeof formSchema>) {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
+        toast({
+            title: "Team was created",
+            duration: 2000,
+            className: "bg-green-800 text-white font-bold"
+        })
         console.log(values);
     }
 
