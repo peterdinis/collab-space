@@ -49,7 +49,7 @@ const CreateTeamModal: FC = () => {
 
     return (
         <Dialog>
-            <DialogTrigger>Create new team</DialogTrigger>
+            <DialogTrigger>New Team</DialogTrigger>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle className='prose-h1: prose flex justify-center align-top text-3xl font-bold dark:text-blue-50'>
