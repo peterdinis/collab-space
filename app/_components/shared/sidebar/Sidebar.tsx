@@ -13,6 +13,7 @@ import {
 import { useAuth } from '@/app/_context/AuthContext';
 import { useToast } from '@/components/ui/use-toast';
 import { useRouter } from 'next/navigation';
+import CreateTeamModal from '../../teams/CreateTeamModal';
 
 const Sidebar = () => {
     const { currentUser, logout } = useAuth();
@@ -63,13 +64,12 @@ const Sidebar = () => {
                             Workspaces
                         </Link>
 
-                        <Link
-                            href='/workspaces'
+                        <div
                             className='mt-5 flex items-center gap-3 rounded-lg px-3 py-2 text-xl font-bold text-muted-foreground transition-all hover:bg-muted hover:text-primary'
                         >
                             <Users2 className='h-5 w-5' />
-                            Create new team
-                        </Link>
+                            <CreateTeamModal />
+                        </div>
 
                         <Link
                             href='/workspaces'
