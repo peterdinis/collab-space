@@ -12,7 +12,6 @@ import {
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { formSchema } from './teamModalFormSchema';
 import { Button } from '@/components/ui/button';
 import {
     Form,
@@ -25,8 +24,9 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
+import { formSchema } from './workspaceFormSchema';
 
-const CreateTeamModal: FC = () => {
+const CreateWorkspaceModal: FC = () => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -40,7 +40,7 @@ const CreateTeamModal: FC = () => {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
         toast({
-            title: "Team was created",
+            title: "Worksapce was created",
             duration: 2000,
             className: "bg-green-800 text-white font-bold"
         })
@@ -49,11 +49,11 @@ const CreateTeamModal: FC = () => {
 
     return (
         <Dialog>
-            <DialogTrigger>New Team</DialogTrigger>
+            <DialogTrigger>New Workspace</DialogTrigger>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle className='prose-h1: prose flex justify-center align-top text-3xl font-bold dark:text-blue-50'>
-                        New Team
+                        New Worksapce
                     </DialogTitle>
                     <DialogDescription className='mt-5'>
                         <Form {...form}>
@@ -66,7 +66,7 @@ const CreateTeamModal: FC = () => {
                                     name='name'
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>Team Name</FormLabel>
+                                            <FormLabel>Worksapce Name</FormLabel>
                                             <FormControl>
                                                 <Input
                                                     placeholder='shadcn'
@@ -91,4 +91,4 @@ const CreateTeamModal: FC = () => {
     );
 };
 
-export default CreateTeamModal;
+export default CreateWorkspaceModal;
