@@ -26,7 +26,7 @@ interface LoginFormInputs {
 
 const LoginForm: FC = () => {
     const { register, handleSubmit } = useForm<LoginFormInputs>();
-    const { login } = useAuth();
+    const { login, signInWithGoogle } = useAuth();
     const { toast } = useToast();
     const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
@@ -93,7 +93,7 @@ const LoginForm: FC = () => {
                             <Button type='submit' className='w-full'>
                                 Login
                             </Button>
-                            <Button variant='outline' className='w-full'>
+                            <Button variant='outline' onClick={signInWithGoogle} className='w-full'>
                                 Login with Google
                             </Button>
                         </div>

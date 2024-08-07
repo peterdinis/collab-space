@@ -19,6 +19,7 @@ import {
     UserCredential,
 } from 'firebase/auth';
 import { auth } from '../_firebase/init';
+import { useRouter } from 'next/navigation';
 
 interface AuthContextType {
     currentUser: User | null;
@@ -40,6 +41,7 @@ export const useAuth = (): AuthContextType => {
 
 export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const [currentUser, setCurrentUser] = useState<User | null>(null);
+    const router = useRouter();
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -69,6 +71,7 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
         const provider = new GoogleAuthProvider();
         try {
             const result = await signInWithPopup(auth, provider);
+            router.push("/dashboard");
             return result;
         } catch (error) {
             console.error(
