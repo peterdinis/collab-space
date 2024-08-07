@@ -48,6 +48,7 @@ const CreateTeamModal: FC = () => {
                 createdAt: format(new Date(), 'yyyy-MM-dd')
             });
 
+            form.reset();
             toast({
                 title: "Team was created",
                 duration: 2000,
