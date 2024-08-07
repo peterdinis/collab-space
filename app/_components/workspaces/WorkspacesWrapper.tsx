@@ -4,6 +4,7 @@ import DashboardHeader from '../dashboard/DashboardHeader';
 import Header from '../shared/Header';
 import { Input } from '@/components/ui/input';
 import WorkspacesPagination from './WorkspacesPagination';
+import WorkspacesCard from './WorkspacesCard';
 
 const WorkspacesWrapper: FC = () => {
     return (
@@ -17,7 +18,7 @@ const WorkspacesWrapper: FC = () => {
                     </div>
                     <Input placeholder='Search...' />
                     <div className='ml-4'>
-                        WORKSPACES
+                        <WorkspacesCard />
                     </div>
                     <WorkspacesPagination />
                 </main>
