@@ -24,7 +24,7 @@ const Shape1 = () => (
 
 const Shape2 = () => (
     <svg
-        className='absolute bottom-0 left-1/4 top-0 text-blue-600 lg:left-[45%]'
+        className='absolute bottom-0 left-1/4 top-0 text-blue-100 lg:left-[45%]'
         width='765'
         height='616'
         viewBox='0 0 765 616'

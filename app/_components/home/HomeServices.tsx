@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { LucideIcon } from 'lucide-react';
 import { Cannabis, Shuffle, Camera, Award } from 'lucide-react';
 
@@ -54,7 +54,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ service }) => (
     </div>
 );
 
-const ShapeOne: React.FC = () => {
+const ShapeOne: FC = () => {
     return (
         <svg
             className='absolute -bottom-[20%] left-0 -z-[1]'
@@ -88,7 +88,7 @@ const ShapeOne: React.FC = () => {
     );
 };
 
-const ShapeTwo: React.FC = () => {
+const ShapeTwo: FC = () => {
     return (
         <svg
             className='absolute -top-[20%] right-0 -z-[1]'
@@ -109,7 +109,7 @@ const ShapeTwo: React.FC = () => {
     );
 };
 
-const HomeServices: React.FC = () => {
+const HomeServices: FC = () => {
     return (
         <section className='relative z-[1] overflow-hidden bg-gray-50 py-14 text-zinc-900 dark:bg-background dark:text-white md:py-24'>
             <ShapeOne />
