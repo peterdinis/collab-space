@@ -9,18 +9,74 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { formSchema } from './teamModalFormSchema';
+import { Button } from '@/components/ui/button';
+import {
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { useToast } from '@/components/ui/use-toast';
 
 const CreateTeamModal: FC = () => {
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            name: '',
+        },
+    });
+
+    function onSubmit(values: z.infer<typeof formSchema>) {
+        // Do something with the form values.
+        // ✅ This will be type-safe and validated.
+        console.log(values);
+    }
+
     return (
         <Dialog>
             <DialogTrigger>Create new team</DialogTrigger>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle className='flex justify-center align-top font-bold text-3xl dark:text-blue-50 prose prose-h1: '>New Team</DialogTitle>
+                    <DialogTitle className='prose-h1: prose flex justify-center align-top text-3xl font-bold dark:text-blue-50'>
+                        New Team
+                    </DialogTitle>
                     <DialogDescription className='mt-5'>
-                        This action cannot be undone. This will permanently
-                        delete your account and remove your data from our
-                        servers.
+                        <Form {...form}>
+                            <form
+                                onSubmit={form.handleSubmit(onSubmit)}
+                                className='space-y-8'
+                            >
+                                <FormField
+                                    control={form.control}
+                                    name='name'
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Team Name</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    placeholder='shadcn'
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormDescription>
+                                                This is your public display
+                                                name.
+                                            </FormDescription>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <Button type='submit'>Submit</Button>
+                            </form>
+                        </Form>
                     </DialogDescription>
                 </DialogHeader>
             </DialogContent>
