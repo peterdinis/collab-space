@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import {
     Card,
     CardContent,
-    CardDescription,
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
@@ -55,9 +54,6 @@ const RegisterForm: FC = () => {
             <Card className='mx-auto max-w-sm'>
                 <CardHeader>
                     <CardTitle className='text-2xl'>Register</CardTitle>
-                    <CardDescription>
-                        Enter your details below to create a new account
-                    </CardDescription>
                 </CardHeader>
                 <CardContent>
                     <form onSubmit={handleSubmit(onSubmit)}>
