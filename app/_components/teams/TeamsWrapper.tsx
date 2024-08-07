@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import Sidebar from '../shared/sidebar/Sidebar';
 import DashboardHeader from '../dashboard/DashboardHeader';
+import Header from '../shared/Header';
 
 const TeamsWrapper: FC = () => {
     return (
@@ -10,9 +11,7 @@ const TeamsWrapper: FC = () => {
                 <DashboardHeader />
                 <main className='flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6'>
                     <div className='flex items-center'>
-                        <h1 className='prose-h1: prose ml-2 mt-6 text-lg font-semibold dark:text-white md:text-2xl'>
-                            My Teams
-                        </h1>
+                        <Header text='My Teams' />
                     </div>
                     rrrrrr
                 </main>
