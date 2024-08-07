@@ -2,7 +2,7 @@ import { FC } from 'react';
 import Sidebar from '../shared/sidebar/Sidebar';
 import DashboardHeader from '../dashboard/DashboardHeader';
 import Header from '../shared/Header';
-import TeamsCard from './TeamsCard';
+import TeamsCard from './TeamsCards';
 import { Input } from '@/components/ui/input';
 import TeamsPagination from './TeamsPagination';
 
