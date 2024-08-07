@@ -14,6 +14,9 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     User,
+    signInWithPopup,
+    GoogleAuthProvider,
+    UserCredential,
 } from 'firebase/auth';
 import { auth } from '../_firebase/init';
 
@@ -21,7 +24,7 @@ interface AuthContextType {
     currentUser: User | null;
     register: (email: string, password: string) => Promise<void>;
     login: (email: string, password: string) => Promise<void>;
-    // signInWithGoogle: () => Promise<void>; // TODO: Later
+    signInWithGoogle: () => Promise<UserCredential | undefined>;
     logout: () => Promise<void>;
 }
 
@@ -62,15 +65,18 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
     };
 
     // TODO: Later
-    /* const signInWithGoogle = async () => {
+    const signInWithGoogle = async () => {
         const provider = new GoogleAuthProvider();
         try {
             const result = await signInWithPopup(auth, provider);
             return result;
         } catch (error) {
-            console.error('Error signing in with Google:', (error as Error).message);
+            console.error(
+                'Error signing in with Google:',
+                (error as Error).message,
+            );
         }
-    }; */
+    };
 
     const logout = async () => {
         try {
@@ -84,7 +90,7 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
         currentUser,
         register,
         login,
-        // signInWithGoogle, // TODO: Later
+        signInWithGoogle,
         logout,
     };
 
