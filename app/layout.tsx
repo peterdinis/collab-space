@@ -25,12 +25,12 @@ export default function RootLayout({
             <body className={inter.className}>
                 <ThemeProvider attribute='class'>
                     <AuthProvider>
-                        <AuthSessionCheckWrapper>
+                      {/*   <AuthSessionCheckWrapper> */} {/* TODO: fix later */}
                             <Navigation />
                             {children}
                             <ScrollToTop />
                             <Toaster />
-                        </AuthSessionCheckWrapper>
+                        {/* </AuthSessionCheckWrapper> */}
                     </AuthProvider>
                 </ThemeProvider>
             </body>

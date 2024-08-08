@@ -32,16 +32,14 @@ import { useAuth } from '@/app/_context/AuthContext';
 
 const CreateTeamModal: FC = () => {
     const {currentUser} = useAuth();
+    
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: '',
             description: "",
-            creatorId: currentUser?.uid,
         },
     });
-
-    /* TODO: Add uid to workspace */
 
     const { toast } = useToast();
 
@@ -50,7 +48,8 @@ const CreateTeamModal: FC = () => {
             await addDoc(collection(db, 'teams'), {
                 name: values.name,
                 description: values.description,
-                createdAt: format(new Date(), 'yyyy-MM-dd')
+                createdAt: format(new Date(), 'yyyy-MM-dd'),
+                creatorId: currentUser?.uid
             });
 
             form.reset();
