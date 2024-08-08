@@ -28,15 +28,20 @@ import { useToast } from '@/components/ui/use-toast';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '@/app/_firebase/init';
 import {format} from "date-fns";
+import { useAuth } from '@/app/_context/AuthContext';
 
 const CreateTeamModal: FC = () => {
+    const {currentUser} = useAuth();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: '',
-            description: ""
+            description: "",
+            creatorId: currentUser?.uid,
         },
     });
+
+    /* TODO: Add uid to workspace */
 
     const { toast } = useToast();
 
