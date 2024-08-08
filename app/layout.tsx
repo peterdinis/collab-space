@@ -7,6 +7,8 @@ import { Toaster } from '@/components/ui/toaster';
 import ScrollToTop from './_components/shared/ScrollToTop';
 import { AuthProvider } from './_context/AuthContext';
 import AuthSessionCheckWrapper from './_components/auth/AuthSessionCheckWrapper';
+import { Suspense } from 'react';
+import { Loader2 } from 'lucide-react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,16 +25,20 @@ export default function RootLayout({
     return (
         <html lang='en'>
             <body className={inter.className}>
-                <ThemeProvider attribute='class'>
-                    <AuthProvider>
-                      {/*   <AuthSessionCheckWrapper> */} {/* TODO: fix later */}
-                            <Navigation />
-                            {children}
-                            <ScrollToTop />
-                            <Toaster />
-                        {/* </AuthSessionCheckWrapper> */}
-                    </AuthProvider>
-                </ThemeProvider>
+                <Suspense
+                    fallback={<Loader2 className='h-8 w-8 animate-spin' />}
+                >
+                    <ThemeProvider attribute='class'>
+                        <AuthProvider>
+                            <AuthSessionCheckWrapper>
+                                <Navigation />
+                                {children}
+                                <ScrollToTop />
+                                <Toaster />
+                            </AuthSessionCheckWrapper>
+                        </AuthProvider>
+                    </ThemeProvider>
+                </Suspense>
             </body>
         </html>
     );
