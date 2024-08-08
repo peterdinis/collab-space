@@ -79,13 +79,13 @@ const Sidebar = () => {
                             <CreateWorkspaceModal />
                         </div>
 
-                        <span
+                        <div
                             onClick={logoutFromApp}
-                            className='mt-5 flex items-center gap-3 rounded-lg px-3 py-2 text-xl font-bold text-muted-foreground transition-all hover:bg-muted hover:text-primary'
+                            className='mt-5 cursor-pointer flex items-center gap-3 rounded-lg px-3 py-2 text-xl font-bold text-muted-foreground transition-all hover:bg-muted hover:text-primary'
                         >
                             <LogOut className='h-5 w-5' />
                             Logout
-                        </span>
+                        </div>
                     </nav>
                 </div>
                 <div className='mt-auto p-4'>
