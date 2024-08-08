@@ -31,7 +31,7 @@ const Navigation: FC = () => {
                     </span>
                 </Link>
                 <div className='ml-auto'>
-                    {currentUser && pathname === "/dashboard" ? (
+                    {currentUser && pathname !== "/login" ? (
                         <ProfileDropdown />
                     ) : (
                         <>
