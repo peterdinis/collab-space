@@ -86,7 +86,7 @@ const LoginForm: FC = () => {
                                         className='absolute inset-y-0 right-0 flex items-center px-2'
                                         onClick={() => setShowPassword(!showPassword)}
                                     >
-                                        {showPassword ? <EyeOff />: <Eye />}
+                                        {showPassword ? <Eye /> : <EyeOff />}
                                     </Button>
                                 </div>
                             </div>

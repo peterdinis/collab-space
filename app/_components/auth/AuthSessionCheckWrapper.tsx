@@ -14,7 +14,7 @@ const AuthSessionCheckWrapper: FC<IAuthSessionCheckWrapperProps> = ({ children }
     const pathname = usePathname()
 
     useEffect(() => {
-        if (!currentUser && pathname !== '/') {
+        if (!currentUser && pathname !== '/' && pathname !== "/register") {
             router.push('/login'); 
         }
     }, [currentUser, pathname, router]);
