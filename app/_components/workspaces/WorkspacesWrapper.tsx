@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import WorkspacesPagination from './WorkspacesPagination';
 import { useAuth } from '@/app/_context/AuthContext';
+import { Ghost } from 'lucide-react';
 
 interface Workspace {
     id: string;
@@ -111,30 +112,39 @@ const WorkspacesWrapper: FC = () => {
                     <Input placeholder='Search...' value={search} onChange={handleSearchChange} />
                     <div className='ml-4'>
                         <section className='grid grid-cols-1 gap-6 p-4 md:grid-cols-2 lg:grid-cols-4 lg:p-6'>
-                            {workspaces.map((workspace) => (
-                                <div key={workspace.id} className='group relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl'>
-                                    <Link href={`/workspace/${workspace.id}`} className='absolute inset-0 z-10' prefetch={false}>
-                                        <span className='sr-only'>View {workspace.name}</span>
-                                    </Link>
-                                    <div className='flex items-center justify-center bg-muted p-6'>
-                                        <span className='text-4xl'>{workspace.emoji}</span>
+                            {workspaces.length > 0 ? (
+                                workspaces.map((workspace) => (
+                                    <div key={workspace.id} className='group relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl'>
+                                        <Link href={`/workspace/${workspace.id}`} className='absolute inset-0 z-10' prefetch={false}>
+                                            <span className='sr-only'>View {workspace.name}</span>
+                                        </Link>
+                                        <div className='flex items-center justify-center bg-muted p-6'>
+                                            <span className='text-4xl'>{workspace.emoji}</span>
+                                        </div>
+                                        <div className='bg-background p-4'>
+                                            <h3 className='text-xl font-bold'>{workspace.name}</h3>
+                                            <p className='text-sm text-muted-foreground'>{workspace.description}</p>
+                                            <Button className='mt-5 flex justify-center align-top' variant={'link'}>Detail</Button>
+                                        </div>
                                     </div>
-                                    <div className='bg-background p-4'>
-                                        <h3 className='text-xl font-bold'>{workspace.name}</h3>
-                                        <p className='text-sm text-muted-foreground'>{workspace.description}</p>
-                                        <Button className='mt-5 flex justify-center align-top' variant={'link'}>Detail</Button>
-                                    </div>
+                                ))
+                            ) : (
+                                <div className='text-lg'>
+                                    <Ghost className='animate-bounce w-12 h-12' />
+                                    <p className='prose prose-p: font-bold dark:text-white text-xl'>You have not created any workspaces yet.</p>
                                 </div>
-                            ))}
+                            )}
                         </section>
                     </div>
-                    <div className='flex justify-center'>
-                        <WorkspacesPagination
-                            currentPage={currentPage}
-                            totalPages={totalPages}
-                            onPageChange={handlePageChange}
-                        />
-                    </div>
+                    {totalPages > 1 && (
+                        <div className='flex justify-center'>
+                            <WorkspacesPagination
+                                currentPage={currentPage}
+                                totalPages={totalPages}
+                                onPageChange={handlePageChange}
+                            />
+                        </div>
+                    )}
                 </main>
             </div>
         </div>
