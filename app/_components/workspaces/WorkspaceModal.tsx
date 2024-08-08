@@ -139,10 +139,11 @@ const CreateWorkspaceModal: FC = () => {
                                     <FormItem>
                                         <FormLabel>Public Workspace</FormLabel>
                                         <FormControl>
-                                            <Checkbox
-                                                className="size-3 ml-5"
+                                            <Input
+                                                type='checkbox'
+                                                className="size-4 ml-5"
                                                 checked={field.value}
-                                                onCheckedChange={(checked) =>
+                                                onChange={(checked) =>
                                                     field.onChange(!!checked)
                                                 }
                                             />
