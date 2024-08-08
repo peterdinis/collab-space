@@ -6,6 +6,7 @@ import ThemeProvider from './_components/shared/providers/ThemeProvider';
 import { Toaster } from '@/components/ui/toaster';
 import ScrollToTop from './_components/shared/ScrollToTop';
 import { AuthProvider } from './_context/AuthContext';
+import AuthSessionCheckWrapper from './_components/auth/AuthSessionCheckWrapper';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -24,10 +25,12 @@ export default function RootLayout({
             <body className={inter.className}>
                 <ThemeProvider attribute='class'>
                     <AuthProvider>
-                        <Navigation />
-                        {children}
-                        <ScrollToTop />
-                        <Toaster />
+                        <AuthSessionCheckWrapper>
+                            <Navigation />
+                            {children}
+                            <ScrollToTop />
+                            <Toaster />
+                        </AuthSessionCheckWrapper>
                     </AuthProvider>
                 </ThemeProvider>
             </body>
