@@ -2,7 +2,7 @@
 
 import { useAuth } from '@/app/_context/AuthContext';
 import { FC, ReactNode, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 interface IAuthSessionCheckWrapperProps {
     children?: ReactNode;
@@ -11,12 +11,13 @@ interface IAuthSessionCheckWrapperProps {
 const AuthSessionCheckWrapper: FC<IAuthSessionCheckWrapperProps> = ({ children }: IAuthSessionCheckWrapperProps) => {
     const { currentUser } = useAuth();
     const router = useRouter();
+    const pathname = usePathname()
 
     useEffect(() => {
-        if (!currentUser) {
+        if (!currentUser && pathname !== '/') {
             router.push('/login'); 
         }
-    }, [currentUser, router]);
+    }, [currentUser, pathname, router]);
 
     return (
         <>
