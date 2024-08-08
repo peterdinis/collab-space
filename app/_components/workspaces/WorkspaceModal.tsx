@@ -29,10 +29,12 @@ import { addDoc, collection } from 'firebase/firestore';
 import { formSchema } from './workspaceFormSchema';
 import { db } from '@/app/_firebase/init';
 import EmojiPicker from '../shared/EmojiPicker';
+import { useAuth } from '@/app/_context/AuthContext';
+import {format} from "date-fns";
 
 const CreateWorkspaceModal: FC = () => {
     const [selectedEmoji, setSelectedEmoji] = useState<string>('');
-
+    const {currentUser} = useAuth();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -55,7 +57,8 @@ const CreateWorkspaceModal: FC = () => {
                 name: values.name,
                 emoji: values.emoji,
                 isPublic: values.isPublic,
-                createdAt: new Date(),
+                createdAt: format(new Date(), 'yyyy-MM-dd'),
+                creatorId: currentUser?.uid
             });
 
             toast({

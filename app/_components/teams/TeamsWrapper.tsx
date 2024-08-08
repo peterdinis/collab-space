@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect, ChangeEvent } from 'react';
 import Sidebar from '../shared/sidebar/Sidebar';
 import DashboardHeader from '../dashboard/DashboardHeader';
 import Header from '../shared/Header';
@@ -9,8 +9,9 @@ import TeamsPagination from './TeamsPagination';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { db } from '@/app/_firebase/init';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { Loader2 } from 'lucide-react';
+import { useAuth } from '@/app/_context/AuthContext';
 
 const TeamsWrapper: FC = () => {
     const [teams, setTeams] = useState<any[]>([]);
@@ -19,12 +20,16 @@ const TeamsWrapper: FC = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const teamsPerPage = 8;
-
+    const { currentUser } = useAuth();
+    
     useEffect(() => {
         const fetchTeams = async () => {
+            if (!currentUser) return;  // Ensure the user is authenticated
             try {
+                // Create a query to fetch teams where creatorId matches the current user's UID
                 const teamsCollection = collection(db, 'teams');
-                const teamsSnapshot = await getDocs(teamsCollection);
+                const q = query(teamsCollection, where('creatorId', '==', currentUser.uid));
+                const teamsSnapshot = await getDocs(q);
                 const teamsList = teamsSnapshot.docs.map(doc => ({
                     id: doc.id,
                     ...doc.data(),
@@ -39,7 +44,7 @@ const TeamsWrapper: FC = () => {
         };
 
         fetchTeams();
-    }, []);
+    }, [currentUser]);
 
     useEffect(() => {
         const filtered = teams.filter(team =>
@@ -49,7 +54,7 @@ const TeamsWrapper: FC = () => {
         setCurrentPage(1);
     }, [searchTerm, teams]);
 
-    const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);
     };
 

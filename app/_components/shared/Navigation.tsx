@@ -9,12 +9,14 @@ import ThemeSwitch from './ThemeSwitch';
 import Link from 'next/link';
 import { useAuth } from '@/app/_context/AuthContext';
 import ProfileDropdown from '../auth/ProfileDropdown';
+import { usePathname } from 'next/navigation';
 
 const Navigation: FC = () => {
     const scrolled = useScrollTop();
     const { currentUser } = useAuth();
+    const pathname = usePathname();
 
-    return (
+    return (    
         <div
             className={cn(
                 'fixed top-0 z-50 flex w-full items-center bg-background p-4 text-2xl font-bold shadow-white dark:bg-[#1F1F1F]',
@@ -29,7 +31,7 @@ const Navigation: FC = () => {
                     </span>
                 </Link>
                 <div className='ml-auto'>
-                    {currentUser ? (
+                    {currentUser && pathname === "/dashboard" ? (
                         <ProfileDropdown />
                     ) : (
                         <>
