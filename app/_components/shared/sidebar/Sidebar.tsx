@@ -2,14 +2,6 @@
 
 import Link from 'next/link';
 import { FileText, Home, LogOut, Package, Users, Users2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from '@/components/ui/card';
 import { useAuth } from '@/app/_context/AuthContext';
 import { useToast } from '@/components/ui/use-toast';
 import { useRouter } from 'next/navigation';
@@ -79,30 +71,14 @@ const Sidebar = () => {
                             <CreateWorkspaceModal />
                         </div>
 
-                        <span
+                        <div
                             onClick={logoutFromApp}
-                            className='mt-5 flex items-center gap-3 rounded-lg px-3 py-2 text-xl font-bold text-muted-foreground transition-all hover:bg-muted hover:text-primary'
+                            className='mt-5 cursor-pointer flex items-center gap-3 rounded-lg px-3 py-2 text-xl font-bold text-muted-foreground transition-all hover:bg-muted hover:text-primary'
                         >
                             <LogOut className='h-5 w-5' />
                             Logout
-                        </span>
+                        </div>
                     </nav>
-                </div>
-                <div className='mt-auto p-4'>
-                    <Card x-chunk='dashboard-02-chunk-0'>
-                        <CardHeader className='p-2 pt-0 md:p-4'>
-                            <CardTitle>Upgrade to Pro</CardTitle>
-                            <CardDescription>
-                                Unlock all features and get unlimited access to
-                                our support team.
-                            </CardDescription>
-                        </CardHeader>
-                        <CardContent className='p-2 pt-0 md:p-4 md:pt-0'>
-                            <Button size='sm' className='w-full'>
-                                Upgrade
-                            </Button>
-                        </CardContent>
-                    </Card>
                 </div>
             </div>
         </div>

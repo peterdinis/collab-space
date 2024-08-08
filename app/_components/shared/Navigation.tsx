@@ -31,17 +31,17 @@ const Navigation: FC = () => {
                     </span>
                 </Link>
                 <div className='ml-auto'>
-                    {currentUser && pathname === "/dashboard" ? (
+                    {currentUser && pathname !== "/login" ? (
                         <ProfileDropdown />
                     ) : (
                         <>
-                            <Button variant={'default'} size={'lg'}>
+                            <Button variant={'default'} size={'default'}>
                                 <Link href='/register'>Register</Link>
                             </Button>
                             <Button
                                 variant={'secondary'}
                                 className='ml-4'
-                                size={'lg'}
+                                size={'default'}
                             >
                                 <Link href='/login'>Login</Link>
                             </Button>
