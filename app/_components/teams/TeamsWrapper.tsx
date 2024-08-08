@@ -26,7 +26,6 @@ const TeamsWrapper: FC = () => {
         const fetchTeams = async () => {
             if (!currentUser) return;  // Ensure the user is authenticated
             try {
-                // Create a query to fetch teams where creatorId matches the current user's UID
                 const teamsCollection = collection(db, 'teams');
                 const q = query(teamsCollection, where('creatorId', '==', currentUser.uid));
                 const teamsSnapshot = await getDocs(q);
@@ -47,7 +46,7 @@ const TeamsWrapper: FC = () => {
     }, [currentUser]);
 
     useEffect(() => {
-        const filtered = teams.filter(team =>
+        const filtered = teams.filter((team: { name: string; }) =>
             team.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setFilteredTeams(filtered);

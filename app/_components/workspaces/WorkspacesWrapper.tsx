@@ -12,16 +12,10 @@ import { Button } from '@/components/ui/button';
 import WorkspacesPagination from './WorkspacesPagination';
 import { useAuth } from '@/app/_context/AuthContext';
 import { Ghost } from 'lucide-react';
-
-interface Workspace {
-    id: string;
-    name: string;
-    emoji: string;
-    description: string;
-}
+import { WorkspaceType } from '@/app/_types/workspaceTypes';
 
 const WorkspacesWrapper: FC = () => {
-    const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
+    const [workspaces, setWorkspaces] = useState<WorkspaceType[]>([]);
     const [lastDoc, setLastDoc] = useState<DocumentData | null>(null);
     const [, setLoading] = useState(false);
     const [search, setSearch] = useState('');
@@ -68,7 +62,7 @@ const WorkspacesWrapper: FC = () => {
             const newWorkspaces = documentSnapshots.docs.map((doc) => ({
                 id: doc.id,
                 ...doc.data()
-            })) as Workspace[];
+            })) as WorkspaceType[];
 
             if (reset) {
                 setWorkspaces(newWorkspaces);
