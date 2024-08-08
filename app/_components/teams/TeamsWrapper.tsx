@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect, ChangeEvent } from 'react';
 import Sidebar from '../shared/sidebar/Sidebar';
 import DashboardHeader from '../dashboard/DashboardHeader';
 import Header from '../shared/Header';
@@ -54,7 +54,7 @@ const TeamsWrapper: FC = () => {
         setCurrentPage(1);
     }, [searchTerm, teams]);
 
-    const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);
     };
 

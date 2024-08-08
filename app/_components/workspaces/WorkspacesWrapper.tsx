@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import WorkspacesPagination from './WorkspacesPagination';
+import { useAuth } from '@/app/_context/AuthContext';
 
 interface Workspace {
     id: string;
@@ -24,16 +25,21 @@ const WorkspacesWrapper: FC = () => {
     const [, setLoading] = useState(false);
     const [search, setSearch] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
+    const { currentUser } = useAuth();
     const [totalPages, setTotalPages] = useState(1);
 
     const fetchWorkspaces = async (page: number = 1, reset: boolean = false) => {
         setLoading(true);
+
+        if (!currentUser) return;  // Ensure the user is authenticated
+
         const collectionRef = collection(db, 'workspaces');
         let q;
 
         if (search) {
             q = query(
                 collectionRef,
+                where('creatorId', '==', currentUser.uid),
                 where('name', '>=', search),
                 where('name', '<=', search + '\uf8ff'),
                 orderBy('name'),
@@ -42,6 +48,7 @@ const WorkspacesWrapper: FC = () => {
         } else {
             q = query(
                 collectionRef,
+                where('creatorId', '==', currentUser.uid),  // Filter by creatorId
                 orderBy('name'),
                 limit(10)
             );
@@ -69,7 +76,7 @@ const WorkspacesWrapper: FC = () => {
             }
 
             // Assume you get the total count of documents from somewhere
-            const totalCount = 50; // Example total count
+            const totalCount = 50; // Example total count, update with actual count if available
             setTotalPages(Math.ceil(totalCount / 10));
 
         } catch (error) {
@@ -81,7 +88,7 @@ const WorkspacesWrapper: FC = () => {
 
     useEffect(() => {
         fetchWorkspaces(1, true);
-    }, [search]);
+    }, [search, currentUser]);
 
     const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
