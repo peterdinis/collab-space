@@ -9,6 +9,7 @@ import Header from '../shared/Header';
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import WorkspacesPagination from './WorkspacesPagination';
 
 interface Workspace {
     id: string;
@@ -20,10 +21,12 @@ interface Workspace {
 const WorkspacesWrapper: FC = () => {
     const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
     const [lastDoc, setLastDoc] = useState<DocumentData | null>(null);
-    const [loading, setLoading] = useState(false);
+    const [, setLoading] = useState(false);
     const [search, setSearch] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
 
-    const fetchWorkspaces = async (reset: boolean = false) => {
+    const fetchWorkspaces = async (page: number = 1, reset: boolean = false) => {
         setLoading(true);
         const collectionRef = collection(db, 'workspaces');
         let q;
@@ -44,7 +47,7 @@ const WorkspacesWrapper: FC = () => {
             );
         }
 
-        if (lastDoc && !reset) {
+        if (lastDoc && !reset && page > 1) {
             q = query(q, startAfter(lastDoc));
         }
 
@@ -64,6 +67,11 @@ const WorkspacesWrapper: FC = () => {
             } else {
                 setWorkspaces((prevWorkspaces) => [...prevWorkspaces, ...newWorkspaces]);
             }
+
+            // Assume you get the total count of documents from somewhere
+            const totalCount = 50; // Example total count
+            setTotalPages(Math.ceil(totalCount / 10));
+
         } catch (error) {
             console.error("Error fetching workspaces: ", error);
         } finally {
@@ -72,15 +80,16 @@ const WorkspacesWrapper: FC = () => {
     };
 
     useEffect(() => {
-        fetchWorkspaces(true);
+        fetchWorkspaces(1, true);
     }, [search]);
 
     const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
     };
 
-    const loadMore = () => {
-        fetchWorkspaces();
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+        fetchWorkspaces(page);
     };
 
     return (
@@ -113,9 +122,11 @@ const WorkspacesWrapper: FC = () => {
                         </section>
                     </div>
                     <div className='flex justify-center'>
-                        <Button onClick={loadMore} disabled={loading}>
-                            {loading ? 'Loading...' : 'Load More'}
-                        </Button>
+                        <WorkspacesPagination
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            onPageChange={handlePageChange}
+                        />
                     </div>
                 </main>
             </div>
