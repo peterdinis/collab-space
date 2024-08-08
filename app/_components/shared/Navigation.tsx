@@ -22,9 +22,12 @@ const Navigation: FC = () => {
             )}
         >
             <div className='flex w-full items-center'>
-                <div className='flex items-center'>
-                    Collab <Orbit className='ml-2 size-8' />
-                </div>
+                <Link href="/" className='flex items-center'>
+                    <span className='flex items-center'>
+                        Collab
+                        <Orbit className='ml-2 text-2xl' />
+                    </span>
+                </Link>
                 <div className='ml-auto'>
                     {currentUser ? (
                         <ProfileDropdown />
