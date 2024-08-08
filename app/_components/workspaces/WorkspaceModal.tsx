@@ -29,6 +29,7 @@ import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
 import { addDoc, collection } from 'firebase/firestore';
 import { formSchema } from './workspaceFormSchema';
 import { db } from '@/app/_firebase/init';
+import {format} from "date-fns";
 
 const CreateWorkspaceModal: FC = () => {
     const [selectedEmoji, setSelectedEmoji] = useState<string>('');
@@ -55,9 +56,10 @@ const CreateWorkspaceModal: FC = () => {
                 name: values.name,
                 emoji: values.emoji,
                 isPublic: values.isPublic,
-                createdAt: new Date(),
+                createdAt: format(new Date(), 'yyyy-MM-dd')
             });
 
+            form.reset();
             toast({
                 title: 'Workspace was created',
                 duration: 2000,
@@ -77,90 +79,85 @@ const CreateWorkspaceModal: FC = () => {
 
     return (
         <Dialog>
-            <DialogTrigger>New Workspace</DialogTrigger>
+            <DialogTrigger>
+                New Workspace
+            </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle className='prose-h1: prose flex justify-center align-top text-3xl font-bold dark:text-blue-50'>
+                    <DialogTitle className='text-3xl font-bold dark:text-blue-50'>
                         New Workspace
                     </DialogTitle>
-                    <DialogDescription className='mt-5'>
-                        <Form {...form}>
-                            <form
-                                onSubmit={form.handleSubmit(onSubmit)}
-                                className='space-y-8'
-                            >
-                                <FormField
-                                    control={form.control}
-                                    name='name'
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Workspace Name</FormLabel>
-                                            <FormControl>
-                                                <Input
-                                                    placeholder='shadcn'
-                                                    {...field}
-                                                />
-                                            </FormControl>
-                                            <FormDescription>
-                                                This is your public display
-                                                name.
-                                            </FormDescription>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                                <FormField
-                                    control={form.control}
-                                    name='emoji'
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Workspace Logo</FormLabel>
-                                            <FormControl>
-                                                <div className='flex items-center space-x-4'>
-                                                    <EmojiPicker onEmojiClick={handleEmojiClick} />
-                                                    <div className='text-2xl'>
-                                                        {selectedEmoji || 'No emoji selected'}
-                                                    </div>
-                                                </div>
-                                                <input
-                                                    type='hidden'
-                                                    {...field}
-                                                    value={selectedEmoji}
-                                                />
-                                            </FormControl>
-                                            <FormDescription>
-                                                Choose an emoji for your workspace.
-                                            </FormDescription>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                                <FormField
-                                    control={form.control}
-                                    name='isPublic'
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Public Workspace</FormLabel>
-                                            <FormControl>
-                                                <Checkbox
-                                                    checked={field.value}
-                                                    onCheckedChange={(checked) =>
-                                                        field.onChange(!!checked)
-                                                    }
-                                                />
-                                            </FormControl>
-                                            <FormDescription>
-                                                Make the workspace public.
-                                            </FormDescription>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                                <Button type='submit'>Submit</Button>
-                            </form>
-                        </Form>
-                    </DialogDescription>
                 </DialogHeader>
+                <DialogDescription className='mt-5'>
+                    <Form {...form}>
+                        <form
+                            onSubmit={form.handleSubmit(onSubmit)}
+                            className='space-y-8'
+                        >
+                            <FormField
+                                control={form.control}
+                                name='name'
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Workspace Name</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                placeholder='shadcn'
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormDescription>
+                                            This is your public display name.
+                                        </FormDescription>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            
+                            <FormItem>
+                                <FormLabel>Workspace Logo</FormLabel>
+                                <div className='flex items-center space-x-4'>
+                                    <EmojiPicker onEmojiClick={handleEmojiClick} />
+                                    <div className='text-2xl'>
+                                        {selectedEmoji || 'No emoji selected'}
+                                    </div>
+                                </div>
+                                <input
+                                    type='hidden'
+                                    {...form.register('emoji')}
+                                    value={selectedEmoji}
+                                />
+                                <FormDescription>
+                                    Choose an emoji for your workspace.
+                                </FormDescription>
+                            </FormItem>
+
+                            <FormField
+                                control={form.control}
+                                name='isPublic'
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Public Workspace</FormLabel>
+                                        <FormControl>
+                                            <Checkbox
+                                                className="size-3 ml-5"
+                                                checked={field.value}
+                                                onCheckedChange={(checked) =>
+                                                    field.onChange(!!checked)
+                                                }
+                                            />
+                                        </FormControl>
+                                        <FormDescription>
+                                            Make the workspace public.
+                                        </FormDescription>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <Button type='submit'>Submit</Button>
+                        </form>
+                    </Form>
+                </DialogDescription>
             </DialogContent>
         </Dialog>
     );
