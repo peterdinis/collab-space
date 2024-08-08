@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import {
     Card,
     CardContent,
-    CardDescription,
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
@@ -18,6 +17,7 @@ import { useToast } from '@/components/ui/use-toast';
 import { useRouter } from 'next/navigation';
 import AuthWrapper from './AuthWrapper';
 import { Eye, EyeOff } from 'lucide-react';
+import { FaGoogle } from "react-icons/fa";
 
 interface LoginFormInputs {
     email: string;
@@ -94,7 +94,7 @@ const LoginForm: FC = () => {
                                 Login
                             </Button>
                             <Button variant='outline' onClick={signInWithGoogle} className='w-full'>
-                                Login with Google
+                                <FaGoogle /> &nbsp; Login with Google
                             </Button>
                         </div>
                         <div className='mt-4 text-center text-sm'>
