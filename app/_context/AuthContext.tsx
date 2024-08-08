@@ -17,6 +17,8 @@ import {
     signInWithPopup,
     GoogleAuthProvider,
     UserCredential,
+    setPersistence,
+    browserLocalPersistence,
 } from 'firebase/auth';
 import { auth } from '../_firebase/init';
 import { useRouter } from 'next/navigation';
@@ -44,10 +46,18 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const router = useRouter();
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-            setCurrentUser(user);
-        });
-        return unsubscribe;
+        const initializeAuth = async () => {
+            try {
+                await setPersistence(auth, browserLocalPersistence);
+                const unsubscribe = onAuthStateChanged(auth, (user) => {
+                    setCurrentUser(user);
+                });
+                return unsubscribe;
+            } catch (error) {
+                console.error('Error setting persistence:', (error as Error).message);
+            }
+        };
+        initializeAuth();
     }, []);
 
     const register = async (email: string, password: string) => {
@@ -66,7 +76,6 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
         }
     };
 
-    // TODO: Later
     const signInWithGoogle = async () => {
         const provider = new GoogleAuthProvider();
         try {
@@ -74,10 +83,7 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
             router.push("/dashboard");
             return result;
         } catch (error) {
-            console.error(
-                'Error signing in with Google:',
-                (error as Error).message,
-            );
+            console.error('Error signing in with Google:', (error as Error).message);
         }
     };
 
