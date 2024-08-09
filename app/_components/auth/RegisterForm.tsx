@@ -2,21 +2,18 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { FC, useState } from 'react';
 import { Label } from '@/components/ui/label';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler, FieldValues } from 'react-hook-form';
 import { useToast } from '@/components/ui/use-toast';
 import { useRouter } from 'next/navigation';
 import AuthWrapper from './AuthWrapper';
 import { Eye, EyeOff } from 'lucide-react';
-import { useAuth } from '@/app/_hooks/useAuth';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { registerSchema } from './authSchemas';
+import useRegisterUser from '@/app/_hooks/useRegisterUser';
 
 interface RegisterFormInputs {
     email: string;
@@ -24,15 +21,23 @@ interface RegisterFormInputs {
 }
 
 const RegisterForm: FC = () => {
-    const { register, handleSubmit } = useForm<RegisterFormInputs>();
-    const { register: registerUser } = useAuth();
-    const { toast } = useToast();
-    const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset,
+    } = useForm({
+        resolver: zodResolver(registerSchema),
+    });
+    const router = useRouter();
+    const { mutate: registerUserMut, isPending } = useRegisterUser();
+    const { toast } = useToast();
 
-    const onSubmit: SubmitHandler<RegisterFormInputs> = async (data) => {
+    const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         try {
-            await registerUser(data.email, data.password);
+            registerUserMut(data);
+            reset();
             toast({
                 title: 'Register DONE',
                 duration: 2000,
@@ -66,29 +71,48 @@ const RegisterForm: FC = () => {
                                     placeholder='m@example.com'
                                     {...register('email', { required: true })}
                                 />
+                                {errors.email && (
+                                <p className='font-bold text-red-600'>
+                                    Email is Required
+                                </p>
+                            )}
                             </div>
                             <div className='grid gap-2'>
                                 <Label htmlFor='password'>Password</Label>
                                 <div className='relative'>
                                     <Input
                                         id='password'
-                                        type={showPassword ? 'text' : 'password'}
+                                        type={
+                                            showPassword ? 'text' : 'password'
+                                        }
                                         {...register('password', {
                                             required: true,
                                         })}
                                     />
                                     <Button
                                         type='button'
-                                        variant={"ghost"}
+                                        variant={'ghost'}
                                         className='absolute inset-y-0 right-0 flex items-center px-2'
-                                        onClick={() => setShowPassword(!showPassword)}
+                                        onClick={() =>
+                                            setShowPassword(!showPassword)
+                                        }
                                     >
                                         {showPassword ? <Eye /> : <EyeOff />}
                                     </Button>
+
+                                    {errors.password && (
+                                <p className='font-bold text-red-600'>
+                                    Password is required
+                                </p>
+                            )}
                                 </div>
                             </div>
-                            <Button type='submit' className='w-full'>
-                                Register
+                            <Button
+                                disabled={isPending}
+                                type='submit'
+                                className='w-full'
+                            >
+                                {isPending ? 'Registering...' : 'Register'}
                             </Button>
                         </div>
                         <div className='mt-4 text-center text-sm'>
