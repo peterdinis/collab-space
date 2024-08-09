@@ -12,11 +12,11 @@ import { Input } from '@/components/ui/input';
 import { FC, useState } from 'react';
 import { Label } from '@/components/ui/label';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useAuth } from '@/app/_context/AuthContext';
 import { useToast } from '@/components/ui/use-toast';
 import { useRouter } from 'next/navigation';
 import AuthWrapper from './AuthWrapper';
 import { Eye, EyeOff } from 'lucide-react';
+import { useAuth } from '@/app/_hooks/useAuth';
 
 interface RegisterFormInputs {
     email: string;

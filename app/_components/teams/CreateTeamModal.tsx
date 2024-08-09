@@ -28,7 +28,7 @@ import { useToast } from '@/components/ui/use-toast';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '@/app/_firebase/init';
 import {format} from "date-fns";
-import { useAuth } from '@/app/_context/AuthContext';
+import { useAuth } from '@/app/_hooks/useAuth';
 
 const CreateTeamModal: FC = () => {
     const {currentUser} = useAuth();

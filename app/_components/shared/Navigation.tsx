@@ -7,9 +7,9 @@ import { FC } from 'react';
 import { Orbit } from 'lucide-react';
 import ThemeSwitch from './ThemeSwitch';
 import Link from 'next/link';
-import { useAuth } from '@/app/_context/AuthContext';
 import ProfileDropdown from '../auth/ProfileDropdown';
 import { usePathname } from 'next/navigation';
+import { useAuth } from '@/app/_hooks/useAuth';
 
 const Navigation: FC = () => {
     const scrolled = useScrollTop();

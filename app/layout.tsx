@@ -6,7 +6,6 @@ import ThemeProvider from './_components/shared/providers/ThemeProvider';
 import { Toaster } from '@/components/ui/toaster';
 import ScrollToTop from './_components/shared/ScrollToTop';
 import { AuthProvider } from './_context/AuthContext';
-import AuthSessionCheckWrapper from './_components/auth/AuthSessionCheckWrapper';
 import { Suspense } from 'react';
 import { Loader2 } from 'lucide-react';
 

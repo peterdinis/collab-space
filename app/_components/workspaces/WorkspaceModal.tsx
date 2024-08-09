@@ -29,8 +29,8 @@ import { addDoc, collection } from 'firebase/firestore';
 import { formSchema } from './workspaceFormSchema';
 import { db } from '@/app/_firebase/init';
 import EmojiPicker from '../shared/EmojiPicker';
-import { useAuth } from '@/app/_context/AuthContext';
 import {format} from "date-fns";
+import { useAuth } from '@/app/_hooks/useAuth';
 
 const CreateWorkspaceModal: FC = () => {
     const [selectedEmoji, setSelectedEmoji] = useState<string>('');

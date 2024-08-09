@@ -12,8 +12,9 @@ import { db } from '@/app/_firebase/init';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { Loader2, Ghost } from 'lucide-react';
 import Image from 'next/image';
-import { useAuth } from '@/app/_context/AuthContext';
 import secondImg from "@/public/img/secondImage.webp"
+import { useAuth } from '@/app/_hooks/useAuth';
+import { limit } from '@/app/_constants/applicationConstants';
 
 const TeamsWrapper: FC = () => {
     const [teams, setTeams] = useState<any[]>([]);
@@ -21,7 +22,6 @@ const TeamsWrapper: FC = () => {
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const teamsPerPage = 8;
     const { currentUser } = useAuth();
 
     useEffect(() => {
@@ -62,8 +62,8 @@ const TeamsWrapper: FC = () => {
         setSearchTerm(event.target.value);
     };
 
-    const indexOfLastTeam = currentPage * teamsPerPage;
-    const indexOfFirstTeam = indexOfLastTeam - teamsPerPage;
+    const indexOfLastTeam = currentPage * limit;
+    const indexOfFirstTeam = indexOfLastTeam - limit;
     const currentTeams = filteredTeams.slice(indexOfFirstTeam, indexOfLastTeam);
 
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
@@ -95,7 +95,7 @@ const TeamsWrapper: FC = () => {
                                         className='group relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl'
                                     >
                                         <Link
-                                            href={`/detail/${item.id}`}
+                                            href={`/teams/${item.id}`}
                                             className='absolute inset-0 z-10'
                                             prefetch={false}
                                         >
@@ -129,7 +129,7 @@ const TeamsWrapper: FC = () => {
                                                 variant={'default'}
                                             >
                                                 <Link
-                                                    href={`/detail/${item.id}`}
+                                                    href={`/teams/${item.id}`}
                                                 >
                                                     Detail
                                                 </Link>
@@ -147,7 +147,7 @@ const TeamsWrapper: FC = () => {
                     </div>
 
                     <TeamsPagination
-                        teamsPerPage={teamsPerPage}
+                        teamsPerPage={limit}
                         totalTeams={filteredTeams.length}
                         paginate={paginate}
                         currentPage={currentPage}
