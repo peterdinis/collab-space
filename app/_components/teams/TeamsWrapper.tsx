@@ -95,7 +95,7 @@ const TeamsWrapper: FC = () => {
                                         className='group relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl'
                                     >
                                         <Link
-                                            href={`/detail/${item.id}`}
+                                            href={`/teams/${item.id}`}
                                             className='absolute inset-0 z-10'
                                             prefetch={false}
                                         >
@@ -129,7 +129,7 @@ const TeamsWrapper: FC = () => {
                                                 variant={'default'}
                                             >
                                                 <Link
-                                                    href={`/detail/${item.id}`}
+                                                    href={`/teams/${item.id}`}
                                                 >
                                                     Detail
                                                 </Link>
