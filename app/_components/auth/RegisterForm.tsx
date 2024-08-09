@@ -15,11 +15,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { registerSchema } from './authSchemas';
 import useRegisterUser from '@/app/_hooks/useRegisterUser';
 
-interface RegisterFormInputs {
-    email: string;
-    password: string;
-}
-
 const RegisterForm: FC = () => {
     const [showPassword, setShowPassword] = useState(false);
     const {
