@@ -12,8 +12,8 @@ import { db } from '@/app/_firebase/init';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { Loader2, Ghost } from 'lucide-react';
 import Image from 'next/image';
-import { useAuth } from '@/app/_context/AuthContext';
 import secondImg from "@/public/img/secondImage.webp"
+import { useAuth } from '@/app/_hooks/useAuth';
 
 const TeamsWrapper: FC = () => {
     const [teams, setTeams] = useState<any[]>([]);

@@ -3,7 +3,6 @@
 import { ChangeEvent, FC, useEffect, useState } from 'react';
 import Sidebar from '../shared/sidebar/Sidebar';
 import DashboardHeader from '../dashboard/DashboardHeader';
-import { useAuth } from '@/app/_context/AuthContext';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '@/app/_firebase/init';
 import { Ghost, Loader2 } from 'lucide-react';
@@ -12,6 +11,7 @@ import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import WorkspacesPagination from './WorkspacesPagination';
+import { useAuth } from '@/app/_hooks/useAuth';
 
 const WorkspacesWrapper: FC = () => {
     const [workspaces, setWorkspaces] = useState<any[]>([]);
