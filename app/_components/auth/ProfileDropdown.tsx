@@ -12,7 +12,7 @@ import {
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 
 const ProfileDropdown: FC = () => {
     const { data: session } = useSession();
@@ -21,7 +21,7 @@ const ProfileDropdown: FC = () => {
     const router = useRouter();
 
     const logoutFromApp = () => {
-        logout();
+        signOut();
         toast({
             title: 'Succesfully logged out',
             duration: 2000,
@@ -52,7 +52,7 @@ const ProfileDropdown: FC = () => {
                     <DropdownMenuLabel onClick={goToDashboard}>
                         Dashboard
                     </DropdownMenuLabel>
-                    <DropdownMenuItem>{currentUser?.email}</DropdownMenuItem>
+                    <DropdownMenuItem>{session?.user.email}</DropdownMenuItem>
                     <DropdownMenuItem onClick={logoutFromApp}>
                         Logout
                     </DropdownMenuItem>
