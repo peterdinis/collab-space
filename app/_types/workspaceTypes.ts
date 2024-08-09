@@ -3,4 +3,4 @@ export type WorkspaceType = {
     name: string;
     emoji: string;
     description: string;
-}
+};

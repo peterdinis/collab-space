@@ -3,4 +3,4 @@ export type DocumentType = {
     name: string;
     description: string;
     createdAt: string | Date;
-}
+};

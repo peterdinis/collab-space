@@ -16,7 +16,7 @@ const Navigation: FC = () => {
     const { currentUser } = useAuth();
     const pathname = usePathname();
 
-    return (    
+    return (
         <div
             className={cn(
                 'fixed top-0 z-50 flex w-full items-center bg-background p-4 text-2xl font-bold shadow-white dark:bg-[#1F1F1F]',
@@ -24,14 +24,14 @@ const Navigation: FC = () => {
             )}
         >
             <div className='flex w-full items-center'>
-                <Link href="/" className='flex items-center'>
+                <Link href='/' className='flex items-center'>
                     <span className='flex items-center'>
                         Collab
                         <Orbit className='ml-2 text-2xl' />
                     </span>
                 </Link>
                 <div className='ml-auto'>
-                    {currentUser && pathname !== "/login" ? (
+                    {currentUser && pathname !== '/login' ? (
                         <ProfileDropdown />
                     ) : (
                         <>

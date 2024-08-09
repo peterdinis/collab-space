@@ -6,7 +6,7 @@ import axios from 'axios';
 import { useToast } from '@/components/ui/use-toast';
 
 const useRegisterUser = () => {
-    const {toast} = useToast();
+    const { toast } = useToast();
     const router = useRouter();
 
     return useMutation({
@@ -16,18 +16,18 @@ const useRegisterUser = () => {
         },
         onSuccess: () => {
             toast({
-                title: "Register DONE",
+                title: 'Register DONE',
                 duration: 2000,
-                className: "bg-green-800 text-white font-bold"
-            })
+                className: 'bg-green-800 text-white font-bold',
+            });
             router.push('/login');
         },
         onError: () => {
             toast({
-                title: "Register FAILED",
+                title: 'Register FAILED',
                 duration: 2000,
-                className: "bg-red-800 text-white font-bold"
-            })
+                className: 'bg-red-800 text-white font-bold',
+            });
         },
     });
 };

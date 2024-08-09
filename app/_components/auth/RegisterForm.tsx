@@ -67,10 +67,10 @@ const RegisterForm: FC = () => {
                                     {...register('email', { required: true })}
                                 />
                                 {errors.email && (
-                                <p className='font-bold text-red-600'>
-                                    Email is Required
-                                </p>
-                            )}
+                                    <p className='font-bold text-red-600'>
+                                        Email is Required
+                                    </p>
+                                )}
                             </div>
                             <div className='grid gap-2'>
                                 <Label htmlFor='password'>Password</Label>
@@ -96,10 +96,10 @@ const RegisterForm: FC = () => {
                                     </Button>
 
                                     {errors.password && (
-                                <p className='font-bold text-red-600'>
-                                    Password is required
-                                </p>
-                            )}
+                                        <p className='font-bold text-red-600'>
+                                            Password is required
+                                        </p>
+                                    )}
                                 </div>
                             </div>
                             <Button

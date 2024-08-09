@@ -1,11 +1,7 @@
-import { FC } from "react";
+import { FC } from 'react';
 
 const WorkspaceInfo: FC = () => {
-    return (
-        <>
-        aaaaaa
-        </>
-    )
-}
+    return <>aaaaaa</>;
+};
 
-export default WorkspaceInfo
+export default WorkspaceInfo;

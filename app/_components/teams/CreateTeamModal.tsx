@@ -27,17 +27,17 @@ import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '@/app/_firebase/init';
-import {format} from "date-fns";
+import { format } from 'date-fns';
 import { useAuth } from '@/app/_hooks/useAuth';
 
 const CreateTeamModal: FC = () => {
-    const {currentUser} = useAuth();
-    
+    const { currentUser } = useAuth();
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: '',
-            description: "",
+            description: '',
         },
     });
 
@@ -49,22 +49,22 @@ const CreateTeamModal: FC = () => {
                 name: values.name,
                 description: values.description,
                 createdAt: format(new Date(), 'yyyy-MM-dd'),
-                creatorId: currentUser?.uid
+                creatorId: currentUser?.uid,
             });
 
             form.reset();
             toast({
-                title: "Team was created",
+                title: 'Team was created',
                 duration: 2000,
-                className: "bg-green-800 text-white font-bold"
+                className: 'bg-green-800 text-white font-bold',
             });
         } catch (error) {
             toast({
-                title: "Error creating team",
+                title: 'Error creating team',
                 duration: 4000,
-                className: "bg-red-800 text-white font-bold"
+                className: 'bg-red-800 text-white font-bold',
             });
-            console.error("Error adding document: ", error);
+            console.error('Error adding document: ', error);
         }
 
         console.log(values);
@@ -109,7 +109,9 @@ const CreateTeamModal: FC = () => {
                                     name='description'
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>Team Description</FormLabel>
+                                            <FormLabel>
+                                                Team Description
+                                            </FormLabel>
                                             <FormControl>
                                                 <Input
                                                     placeholder='shadcn'

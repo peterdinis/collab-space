@@ -2,22 +2,16 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { FC, useState } from 'react';
 import { Label } from '@/components/ui/label';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, FieldValues } from 'react-hook-form';
 import { useToast } from '@/components/ui/use-toast';
 import { useRouter } from 'next/navigation';
 import AuthWrapper from './AuthWrapper';
 import { Eye, EyeOff } from 'lucide-react';
-import { FaGoogle } from "react-icons/fa";
-import { useAuth } from '@/app/_hooks/useAuth';
+import { signIn } from 'next-auth/react';
 
 interface LoginFormInputs {
     email: string;
@@ -26,27 +20,42 @@ interface LoginFormInputs {
 
 const LoginForm: FC = () => {
     const { register, handleSubmit } = useForm<LoginFormInputs>();
-    const { login, signInWithGoogle } = useAuth();
     const { toast } = useToast();
     const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-    const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
+    const loginUser = async (data: FieldValues) => {
+        setLoading(true);
+
         try {
-            await login(data.email, data.password);
-            toast({
-                title: 'Login successful',
-                duration: 2000,
-                className: 'bg-green-700 text-white font-bold',
+            const result = await signIn('credentials', {
+                ...data,
+                redirect: false,
             });
-            router.push('/dashboard');
+
+            if (result?.error) {
+                toast({
+                    title: result.error,
+                    duration: 2000,
+                    className: 'bg-red-800 text-white font-bold',
+                });
+            } else {
+                toast({
+                    title: 'Login DONE',
+                    duration: 2000,
+                    className: 'bg-green-800 text-white font-bold',
+                });
+                router.push('/dashboard');
+            }
         } catch (error) {
             toast({
-                title: 'Login failed',
+                title: 'Something went wrong',
                 duration: 2000,
-                className: 'bg-red-700 text-white font-bold',
+                className: 'bg-red-800 text-white font-bold',
             });
-            console.error('Login error:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -57,7 +66,7 @@ const LoginForm: FC = () => {
                     <CardTitle className='text-2xl'>Login</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <form onSubmit={handleSubmit(loginUser)}>
                         <div className='grid gap-4'>
                             <div className='grid gap-2'>
                                 <Label htmlFor='email'>Email</Label>
@@ -75,26 +84,31 @@ const LoginForm: FC = () => {
                                 <div className='relative'>
                                     <Input
                                         id='password'
-                                        type={showPassword ? 'text' : 'password'}
+                                        type={
+                                            showPassword ? 'text' : 'password'
+                                        }
                                         {...register('password', {
                                             required: true,
                                         })}
                                     />
                                     <Button
                                         type='button'
-                                        variant={"ghost"}
+                                        variant={'ghost'}
                                         className='absolute inset-y-0 right-0 flex items-center px-2'
-                                        onClick={() => setShowPassword(!showPassword)}
+                                        onClick={() =>
+                                            setShowPassword(!showPassword)
+                                        }
                                     >
                                         {showPassword ? <Eye /> : <EyeOff />}
                                     </Button>
                                 </div>
                             </div>
-                            <Button type='submit' className='w-full'>
-                                Login
-                            </Button>
-                            <Button variant='outline' onClick={signInWithGoogle} className='w-full'>
-                                <FaGoogle /> &nbsp; Login with Google
+                            <Button
+                                disabled={loading}
+                                type='submit'
+                                className='w-full'
+                            >
+                                {loading ? 'Logging in...' : 'Login'}
                             </Button>
                         </div>
                         <div className='mt-4 text-center text-sm'>

@@ -57,23 +57,19 @@ const Sidebar = () => {
                             Workspaces
                         </Link>
 
-                        <div
-                            className='mt-5 flex items-center gap-3 rounded-lg px-3 py-2 text-xl font-bold text-muted-foreground transition-all hover:bg-muted hover:text-primary'
-                        >
+                        <div className='mt-5 flex items-center gap-3 rounded-lg px-3 py-2 text-xl font-bold text-muted-foreground transition-all hover:bg-muted hover:text-primary'>
                             <Users2 className='h-5 w-5' />
                             <CreateTeamModal />
                         </div>
 
-                        <div
-                            className='mt-5 flex items-center gap-3 rounded-lg px-3 py-2 text-xl font-bold text-muted-foreground transition-all hover:bg-muted hover:text-primary'
-                        >
+                        <div className='mt-5 flex items-center gap-3 rounded-lg px-3 py-2 text-xl font-bold text-muted-foreground transition-all hover:bg-muted hover:text-primary'>
                             <FileText className='h-5 w-5' />
                             <CreateWorkspaceModal />
                         </div>
 
                         <div
                             onClick={logoutFromApp}
-                            className='mt-5 cursor-pointer flex items-center gap-3 rounded-lg px-3 py-2 text-xl font-bold text-muted-foreground transition-all hover:bg-muted hover:text-primary'
+                            className='mt-5 flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2 text-xl font-bold text-muted-foreground transition-all hover:bg-muted hover:text-primary'
                         >
                             <LogOut className='h-5 w-5' />
                             Logout

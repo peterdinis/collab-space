@@ -3,4 +3,4 @@ export type TeamType = {
     name: string;
     description: string;
     creatorId?: string;
-}
+};
