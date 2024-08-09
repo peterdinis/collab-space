@@ -30,6 +30,10 @@ const ProfileDropdown: FC = () => {
         router.push('/');
     };
 
+    const goToDashboard = () => {
+        router.push("/dashboard");
+    }
+
     return (
         <>
             <DropdownMenu>
@@ -39,6 +43,7 @@ const ProfileDropdown: FC = () => {
                 <DropdownMenuContent>
                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
                     <DropdownMenuSeparator />
+                    <DropdownMenuLabel onClick={goToDashboard}>Dashboard</DropdownMenuLabel>
                     <DropdownMenuItem>{currentUser?.email}</DropdownMenuItem>
                     <DropdownMenuItem onClick={logoutFromApp}>
                         Logout
