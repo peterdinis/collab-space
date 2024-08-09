@@ -14,6 +14,7 @@ import { Loader2, Ghost } from 'lucide-react';
 import Image from 'next/image';
 import secondImg from "@/public/img/secondImage.webp"
 import { useAuth } from '@/app/_hooks/useAuth';
+import { limit } from '@/app/_constants/applicationConstants';
 
 const TeamsWrapper: FC = () => {
     const [teams, setTeams] = useState<any[]>([]);
@@ -21,7 +22,6 @@ const TeamsWrapper: FC = () => {
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const teamsPerPage = 8;
     const { currentUser } = useAuth();
 
     useEffect(() => {
@@ -62,8 +62,8 @@ const TeamsWrapper: FC = () => {
         setSearchTerm(event.target.value);
     };
 
-    const indexOfLastTeam = currentPage * teamsPerPage;
-    const indexOfFirstTeam = indexOfLastTeam - teamsPerPage;
+    const indexOfLastTeam = currentPage * limit;
+    const indexOfFirstTeam = indexOfLastTeam - limit;
     const currentTeams = filteredTeams.slice(indexOfFirstTeam, indexOfLastTeam);
 
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
@@ -147,7 +147,7 @@ const TeamsWrapper: FC = () => {
                     </div>
 
                     <TeamsPagination
-                        teamsPerPage={teamsPerPage}
+                        teamsPerPage={limit}
                         totalTeams={filteredTeams.length}
                         paginate={paginate}
                         currentPage={currentPage}

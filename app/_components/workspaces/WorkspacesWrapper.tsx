@@ -12,6 +12,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import WorkspacesPagination from './WorkspacesPagination';
 import { useAuth } from '@/app/_hooks/useAuth';
+import { limit } from '@/app/_constants/applicationConstants';
 
 const WorkspacesWrapper: FC = () => {
     const [workspaces, setWorkspaces] = useState<any[]>([]);
@@ -19,7 +20,6 @@ const WorkspacesWrapper: FC = () => {
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const workspacesPerPage = 8;
     const { currentUser } = useAuth();
 
     useEffect(() => {
@@ -60,8 +60,8 @@ const WorkspacesWrapper: FC = () => {
         setSearchTerm(event.target.value);
     };
 
-    const indexOfLastWorkspace = currentPage * workspacesPerPage;
-    const indexOfFirstWorkspace = indexOfLastWorkspace  - workspacesPerPage;
+    const indexOfLastWorkspace = currentPage * limit;
+    const indexOfFirstWorkspace = indexOfLastWorkspace  - limit;
     const currentWorkspaces = filteredWorkspaces.slice(
         indexOfFirstWorkspace,
         indexOfLastWorkspace,
@@ -131,7 +131,7 @@ const WorkspacesWrapper: FC = () => {
                     </div>
 
                     <WorkspacesPagination
-                        workspacesPerPage={workspacesPerPage}
+                        workspacesPerPage={limit}
                         totalWorkspaces={filteredWorkspaces.length}
                         paginate={paginate}
                         currentPage={currentPage}
