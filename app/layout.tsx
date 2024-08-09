@@ -7,6 +7,7 @@ import { Toaster } from '@/components/ui/toaster';
 import ScrollToTop from './_components/shared/ScrollToTop';
 import { Suspense } from 'react';
 import { Loader2 } from 'lucide-react';
+import QueryProvider from './_components/shared/providers/QueryProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -26,12 +27,14 @@ export default function RootLayout({
                 <Suspense
                     fallback={<Loader2 className='h-8 w-8 animate-spin' />}
                 >
-                    <ThemeProvider attribute='class'>
-                        <Navigation />
-                        {children}
-                        <ScrollToTop />
-                        <Toaster />
-                    </ThemeProvider>
+                    <QueryProvider>
+                        <ThemeProvider attribute='class'>
+                            <Navigation />
+                            {children}
+                            <ScrollToTop />
+                            <Toaster />
+                        </ThemeProvider>
+                    </QueryProvider>
                 </Suspense>
             </body>
         </html>
