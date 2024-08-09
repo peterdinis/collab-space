@@ -43,12 +43,11 @@ const ProfileDropdown: FC = () => {
                 <DropdownMenuContent>
                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
                     <DropdownMenuSeparator />
+                    <DropdownMenuLabel onClick={goToDashboard}>Dashboard</DropdownMenuLabel>
                     <DropdownMenuItem>{currentUser?.email}</DropdownMenuItem>
                     <DropdownMenuItem onClick={logoutFromApp}>
                         Logout
                     </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuLabel onClick={goToDashboard}>Dashboard</DropdownMenuLabel>
                 </DropdownMenuContent>
             </DropdownMenu>
         </>
