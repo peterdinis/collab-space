@@ -30,12 +30,10 @@ export default function RootLayout({
                 >
                     <ThemeProvider attribute='class'>
                         <AuthProvider>
-                            <AuthSessionCheckWrapper>
-                                <Navigation />
-                                {children}
-                                <ScrollToTop />
-                                <Toaster />
-                            </AuthSessionCheckWrapper>
+                            <Navigation />
+                            {children}
+                            <ScrollToTop />
+                            <Toaster />
                         </AuthProvider>
                     </ThemeProvider>
                 </Suspense>

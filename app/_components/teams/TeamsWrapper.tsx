@@ -135,14 +135,13 @@ const TeamsWrapper: FC = () => {
                             )}
                         </section>
                     </div>
-                    {filteredTeams.length > teamsPerPage && (
+                    
                         <TeamsPagination
                             teamsPerPage={teamsPerPage}
                             totalTeams={filteredTeams.length}
                             paginate={paginate}
                             currentPage={currentPage}
                         />
-                    )}
                 </main>
             </div>
         </div>
