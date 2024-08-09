@@ -5,7 +5,6 @@ import Navigation from './_components/shared/Navigation';
 import ThemeProvider from './_components/shared/providers/ThemeProvider';
 import { Toaster } from '@/components/ui/toaster';
 import ScrollToTop from './_components/shared/ScrollToTop';
-import { AuthProvider } from './_context/AuthContext';
 import { Suspense } from 'react';
 import { Loader2 } from 'lucide-react';
 
@@ -28,12 +27,10 @@ export default function RootLayout({
                     fallback={<Loader2 className='h-8 w-8 animate-spin' />}
                 >
                     <ThemeProvider attribute='class'>
-                        <AuthProvider>
-                            <Navigation />
-                            {children}
-                            <ScrollToTop />
-                            <Toaster />
-                        </AuthProvider>
+                        <Navigation />
+                        {children}
+                        <ScrollToTop />
+                        <Toaster />
                     </ThemeProvider>
                 </Suspense>
             </body>
