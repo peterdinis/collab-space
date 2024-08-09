@@ -16,7 +16,7 @@ const Sidebar = () => {
 
     const logoutFromApp = () => {
         signOut({
-            redirect: false
+            redirect: false,
         });
         toast({
             title: 'Succesfully logged out',
