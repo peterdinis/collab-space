@@ -6,17 +6,18 @@ import { useToast } from '@/components/ui/use-toast';
 import { useRouter } from 'next/navigation';
 import CreateTeamModal from '../../teams/CreateTeamModal';
 import CreateWorkspaceModal from '../../workspaces/WorkspaceModal';
-import { useAuth } from '@/app/_hooks/useAuth';
+import { signOut, useSession } from 'next-auth/react';
 
 const Sidebar = () => {
-    const { currentUser, logout } = useAuth();
-
+    const { data: session } = useSession();
     const { toast } = useToast();
 
     const router = useRouter();
 
     const logoutFromApp = () => {
-        logout();
+        signOut({
+            redirect: false
+        });
         toast({
             title: 'Succesfully logged out',
             duration: 2000,
@@ -30,7 +31,7 @@ const Sidebar = () => {
             <div className='flex h-full max-h-screen flex-col gap-2'>
                 <div className='flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6'>
                     <div className='flex items-center gap-2 font-semibold'>
-                        <span>Welcome {currentUser?.email}</span>
+                        <span>Welcome {session?.user.email}</span>
                     </div>
                 </div>
                 <div className='flex-1'>

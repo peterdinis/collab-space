@@ -9,11 +9,11 @@ import ThemeSwitch from './ThemeSwitch';
 import Link from 'next/link';
 import ProfileDropdown from '../auth/ProfileDropdown';
 import { usePathname } from 'next/navigation';
-import { useAuth } from '@/app/_hooks/useAuth';
+import { useSession } from 'next-auth/react';
 
 const Navigation: FC = () => {
     const scrolled = useScrollTop();
-    const { currentUser } = useAuth();
+    const { data: session } = useSession();
     const pathname = usePathname();
 
     return (
@@ -31,7 +31,7 @@ const Navigation: FC = () => {
                     </span>
                 </Link>
                 <div className='ml-auto'>
-                    {currentUser && pathname !== '/login' ? (
+                    {session?.user && pathname !== '/login' ? (
                         <ProfileDropdown />
                     ) : (
                         <>

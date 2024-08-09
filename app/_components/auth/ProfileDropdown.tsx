@@ -12,10 +12,10 @@ import {
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
-import { useAuth } from '@/app/_hooks/useAuth';
+import { useSession } from 'next-auth/react';
 
 const ProfileDropdown: FC = () => {
-    const { currentUser, logout } = useAuth();
+    const { data: session } = useSession();
     const { toast } = useToast();
 
     const router = useRouter();
