@@ -1,9 +1,9 @@
 "use client";
 
-import { useAuth } from '@/app/_context/AuthContext';
 import { FC, ReactNode, useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
+import { useAuth } from '@/app/_hooks/useAuth';
 
 interface IAuthSessionCheckWrapperProps {
     children?: ReactNode;

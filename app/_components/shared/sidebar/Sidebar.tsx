@@ -2,11 +2,11 @@
 
 import Link from 'next/link';
 import { FileText, Home, LogOut, Package, Users, Users2 } from 'lucide-react';
-import { useAuth } from '@/app/_context/AuthContext';
 import { useToast } from '@/components/ui/use-toast';
 import { useRouter } from 'next/navigation';
 import CreateTeamModal from '../../teams/CreateTeamModal';
 import CreateWorkspaceModal from '../../workspaces/WorkspaceModal';
+import { useAuth } from '@/app/_hooks/useAuth';
 
 const Sidebar = () => {
     const { currentUser, logout } = useAuth();

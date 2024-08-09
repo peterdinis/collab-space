@@ -9,10 +9,10 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useAuth } from '@/app/_context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
+import { useAuth } from '@/app/_hooks/useAuth';
 
 const ProfileDropdown: FC = () => {
     const { currentUser, logout } = useAuth();
