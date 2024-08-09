@@ -11,7 +11,9 @@ import Link from 'next/link';
 import { db } from '@/app/_firebase/init';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { Loader2, Ghost } from 'lucide-react';
+import Image from 'next/image';
 import { useAuth } from '@/app/_context/AuthContext';
+import secondImg from "@/public/img/secondImage.webp"
 
 const TeamsWrapper: FC = () => {
     const [teams, setTeams] = useState<any[]>([]);
@@ -102,11 +104,12 @@ const TeamsWrapper: FC = () => {
                                             </span>
                                         </Link>
                                         <div className='flex items-center justify-center bg-muted p-6'>
-                                            <img
-                                                src='https://cdn3d.iconscout.com/3d/premium/thumb/team-5339260-4466195.png?f=webp'
+                                            <Image
+                                                src={secondImg}
                                                 alt='Team Logo'
                                                 width={190}
                                                 height={190}
+                                                loading='lazy'
                                                 className='object-contain'
                                                 style={{
                                                     aspectRatio: '80/80',
