@@ -2,46 +2,57 @@ import { FC } from 'react';
 import {
     Pagination,
     PaginationContent,
-    PaginationEllipsis,
     PaginationItem,
     PaginationLink,
     PaginationNext,
     PaginationPrevious,
 } from '@/components/ui/pagination';
 
-interface WorkspacesPaginationProps {
+interface TeamsPaginationProps {
+    teamsPerPage: number;
+    totalTeams: number;
+    paginate: (pageNumber: number) => void;
     currentPage: number;
-    totalPages: number;
-    onPageChange: (page: number) => void;
 }
 
-const WorkspacesPagination: FC<WorkspacesPaginationProps> = ({ currentPage, totalPages, onPageChange }) => {
+const TeamsPagination: FC<TeamsPaginationProps> = ({
+    teamsPerPage,
+    totalTeams,
+    paginate,
+    currentPage,
+}) => {
+    const pageNumbers = [];
+
+    for (let i = 1; i <= Math.ceil(totalTeams / teamsPerPage); i++) {
+        pageNumbers.push(i);
+    }
+
     return (
         <Pagination>
             <PaginationContent>
                 <PaginationItem>
                     <PaginationPrevious
                         href='#'
-                        onClick={() => onPageChange(currentPage - 1)}
+                        onClick={() => paginate(currentPage > 1 ? currentPage - 1 : 1)}
                         isDisabled={currentPage === 1}
                     />
                 </PaginationItem>
-                {[...Array(totalPages)].map((_, index) => (
-                    <PaginationItem key={index}>
+                {pageNumbers.map((number) => (
+                    <PaginationItem key={number}>
                         <PaginationLink
                             href='#'
-                            onClick={() => onPageChange(index + 1)}
-                            isActive={index + 1 === currentPage}
+                            onClick={() => paginate(number)}
+                            isActive={number === currentPage}
                         >
-                            {index + 1}
+                            {number}
                         </PaginationLink>
                     </PaginationItem>
                 ))}
                 <PaginationItem>
                     <PaginationNext
                         href='#'
-                        onClick={() => onPageChange(currentPage + 1)}
-                        isDisabled={currentPage === totalPages}
+                        onClick={() => paginate(currentPage < pageNumbers.length ? currentPage + 1 : pageNumbers.length)}
+                        isDisabled={currentPage === pageNumbers.length}
                     />
                 </PaginationItem>
             </PaginationContent>
@@ -49,4 +60,4 @@ const WorkspacesPagination: FC<WorkspacesPaginationProps> = ({ currentPage, tota
     );
 };
 
-export default WorkspacesPagination;
+export default TeamsPagination;

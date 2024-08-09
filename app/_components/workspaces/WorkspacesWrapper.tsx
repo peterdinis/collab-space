@@ -61,11 +61,11 @@ const WorkspacesWrapper: FC = () => {
         setSearchTerm(event.target.value);
     };
 
-    const indexOfLastTeam = currentPage * workspacesPerPage;
-    const indexOfFirstTeam = indexOfLastTeam - workspacesPerPage;
+    const indexOfLastWorkspace = currentPage * workspacesPerPage;
+    const indexOfFirstWorkspace = indexOfLastWorkspace  - workspacesPerPage;
     const currentTeams = filteredWorkspaces.slice(
-        indexOfFirstTeam,
-        indexOfLastTeam,
+        indexOfFirstWorkspace,
+        indexOfLastWorkspace,
     );
 
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
