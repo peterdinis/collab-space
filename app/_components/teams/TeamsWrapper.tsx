@@ -21,15 +21,18 @@ const TeamsWrapper: FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const teamsPerPage = 8;
     const { currentUser } = useAuth();
-    
+
     useEffect(() => {
         const fetchTeams = async () => {
-            if (!currentUser) return;  // Ensure the user is authenticated
+            if (!currentUser) return; // Ensure the user is authenticated
             try {
                 const teamsCollection = collection(db, 'teams');
-                const q = query(teamsCollection, where('creatorId', '==', currentUser.uid));
+                const q = query(
+                    teamsCollection,
+                    where('creatorId', '==', currentUser.uid),
+                );
                 const teamsSnapshot = await getDocs(q);
-                const teamsList = teamsSnapshot.docs.map(doc => ({
+                const teamsList = teamsSnapshot.docs.map((doc) => ({
                     id: doc.id,
                     ...doc.data(),
                 }));
@@ -46,8 +49,8 @@ const TeamsWrapper: FC = () => {
     }, [currentUser]);
 
     useEffect(() => {
-        const filtered = teams.filter((team: { name: string; }) =>
-            team.name.toLowerCase().includes(searchTerm.toLowerCase())
+        const filtered = teams.filter((team: { name: string }) =>
+            team.name.toLowerCase().includes(searchTerm.toLowerCase()),
         );
         setFilteredTeams(filtered);
         setCurrentPage(1);
@@ -64,7 +67,7 @@ const TeamsWrapper: FC = () => {
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
     if (loading) {
-        return <Loader2 className='animate-spin w-8 h-8' />;
+        return <Loader2 className='h-8 w-8 animate-spin' />;
     }
 
     return (
@@ -94,7 +97,9 @@ const TeamsWrapper: FC = () => {
                                             className='absolute inset-0 z-10'
                                             prefetch={false}
                                         >
-                                            <span className='sr-only'>View Team</span>
+                                            <span className='sr-only'>
+                                                View Team
+                                            </span>
                                         </Link>
                                         <div className='flex items-center justify-center bg-muted p-6'>
                                             <img
@@ -120,7 +125,9 @@ const TeamsWrapper: FC = () => {
                                                 className='mt-5 flex justify-center align-top'
                                                 variant={'default'}
                                             >
-                                                <Link href={`/detail/${item.id}`}>
+                                                <Link
+                                                    href={`/detail/${item.id}`}
+                                                >
                                                     Detail
                                                 </Link>
                                             </Button>
@@ -129,19 +136,19 @@ const TeamsWrapper: FC = () => {
                                 ))
                             ) : (
                                 <div className='flex items-center justify-center gap-2 text-center text-lg'>
-                                    <Ghost className='animate-bounce w-8 h-8' />
-                                    <p>You have not created any teams yet.</p>
+                                    <Ghost className='h-8 w-8 animate-bounce' />
+                                    <p>No team found</p>
                                 </div>
                             )}
                         </section>
                     </div>
-                    
-                        <TeamsPagination
-                            teamsPerPage={teamsPerPage}
-                            totalTeams={filteredTeams.length}
-                            paginate={paginate}
-                            currentPage={currentPage}
-                        />
+
+                    <TeamsPagination
+                        teamsPerPage={teamsPerPage}
+                        totalTeams={filteredTeams.length}
+                        paginate={paginate}
+                        currentPage={currentPage}
+                    />
                 </main>
             </div>
         </div>
