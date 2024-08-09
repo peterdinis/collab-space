@@ -131,8 +131,8 @@ const WorkspacesWrapper: FC = () => {
                     </div>
 
                     <WorkspacesPagination
-                        teamsPerPage={workspacesPerPage}
-                        totalTeams={filteredWorkspaces.length}
+                        workspacesPerPage={workspacesPerPage}
+                        totalWorkspaces={filteredWorkspaces.length}
                         paginate={paginate}
                         currentPage={currentPage}
                     />

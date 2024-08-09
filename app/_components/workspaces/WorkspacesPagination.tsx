@@ -8,22 +8,22 @@ import {
     PaginationPrevious,
 } from '@/components/ui/pagination';
 
-interface TeamsPaginationProps {
-    teamsPerPage: number;
-    totalTeams: number;
+interface WorkspacesPaginationProps {
+    workspacesPerPage: number;
+    totalWorkspaces: number;
     paginate: (pageNumber: number) => void;
     currentPage: number;
 }
 
-const TeamsPagination: FC<TeamsPaginationProps> = ({
-    teamsPerPage,
-    totalTeams,
+const WorkspacesPagination: FC<WorkspacesPaginationProps> = ({
+    workspacesPerPage,
+    totalWorkspaces,
     paginate,
     currentPage,
 }) => {
     const pageNumbers = [];
 
-    for (let i = 1; i <= Math.ceil(totalTeams / teamsPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(totalWorkspaces / workspacesPerPage); i++) {
         pageNumbers.push(i);
     }
 
@@ -60,4 +60,4 @@ const TeamsPagination: FC<TeamsPaginationProps> = ({
     );
 };
 
-export default TeamsPagination;
+export default WorkspacesPagination;
