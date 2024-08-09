@@ -9,6 +9,7 @@ import { Suspense } from 'react';
 import { Loader2 } from 'lucide-react';
 import QueryProvider from './_components/shared/providers/QueryProvider';
 import SessionAppProvider from './_components/shared/providers/SessionProvider';
+import SessionCheckHelper from './_components/auth/SessionCheckHelper';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -29,14 +30,16 @@ export default function RootLayout({
                     fallback={<Loader2 className='h-8 w-8 animate-spin' />}
                 >
                     <SessionAppProvider>
-                        <QueryProvider>
-                            <ThemeProvider attribute='class'>
-                                <Navigation />
-                                {children}
-                                <ScrollToTop />
-                                <Toaster />
-                            </ThemeProvider>
-                        </QueryProvider>
+                        <SessionCheckHelper>
+                            <QueryProvider>
+                                <ThemeProvider attribute='class'>
+                                    <Navigation />
+                                    {children}
+                                    <ScrollToTop />
+                                    <Toaster />
+                                </ThemeProvider>
+                            </QueryProvider>
+                        </SessionCheckHelper>
                     </SessionAppProvider>
                 </Suspense>
             </body>
