@@ -6,6 +6,6 @@ export const formSchema = z.object({
     }),
 
     description: z.string().min(2, {
-        message: "Description for teams must be at least 2 characters"
+        message: 'Description for teams must be at least 2 characters',
     }),
 });

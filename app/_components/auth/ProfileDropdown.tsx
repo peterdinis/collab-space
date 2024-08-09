@@ -12,16 +12,16 @@ import {
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
-import { useAuth } from '@/app/_hooks/useAuth';
+import { signOut, useSession } from 'next-auth/react';
 
 const ProfileDropdown: FC = () => {
-    const { currentUser, logout } = useAuth();
+    const { data: session } = useSession();
     const { toast } = useToast();
 
     const router = useRouter();
 
     const logoutFromApp = () => {
-        logout();
+        signOut();
         toast({
             title: 'Succesfully logged out',
             duration: 2000,
@@ -31,20 +31,28 @@ const ProfileDropdown: FC = () => {
     };
 
     const goToDashboard = () => {
-        router.push("/dashboard");
-    }
+        router.push('/dashboard');
+    };
 
     return (
         <>
             <DropdownMenu>
                 <DropdownMenuTrigger>
-                    <Button className='font-bold text-xl' variant={"ghost"} size={"lg"}>Menu</Button>
+                    <Button
+                        className='text-xl font-bold'
+                        variant={'ghost'}
+                        size={'lg'}
+                    >
+                        Menu
+                    </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuLabel onClick={goToDashboard}>Dashboard</DropdownMenuLabel>
-                    <DropdownMenuItem>{currentUser?.email}</DropdownMenuItem>
+                    <DropdownMenuLabel onClick={goToDashboard}>
+                        Dashboard
+                    </DropdownMenuLabel>
+                    <DropdownMenuItem>{session?.user.email}</DropdownMenuItem>
                     <DropdownMenuItem onClick={logoutFromApp}>
                         Logout
                     </DropdownMenuItem>

@@ -61,7 +61,7 @@ const WorkspacesWrapper: FC = () => {
     };
 
     const indexOfLastWorkspace = currentPage * limit;
-    const indexOfFirstWorkspace = indexOfLastWorkspace  - limit;
+    const indexOfFirstWorkspace = indexOfLastWorkspace - limit;
     const currentWorkspaces = filteredWorkspaces.slice(
         indexOfFirstWorkspace,
         indexOfLastWorkspace,

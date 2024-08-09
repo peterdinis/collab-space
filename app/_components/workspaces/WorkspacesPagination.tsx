@@ -33,7 +33,9 @@ const WorkspacesPagination: FC<WorkspacesPaginationProps> = ({
                 <PaginationItem>
                     <PaginationPrevious
                         href='#'
-                        onClick={() => paginate(currentPage > 1 ? currentPage - 1 : 1)}
+                        onClick={() =>
+                            paginate(currentPage > 1 ? currentPage - 1 : 1)
+                        }
                         isDisabled={currentPage === 1}
                     />
                 </PaginationItem>
@@ -51,7 +53,13 @@ const WorkspacesPagination: FC<WorkspacesPaginationProps> = ({
                 <PaginationItem>
                     <PaginationNext
                         href='#'
-                        onClick={() => paginate(currentPage < pageNumbers.length ? currentPage + 1 : pageNumbers.length)}
+                        onClick={() =>
+                            paginate(
+                                currentPage < pageNumbers.length
+                                    ? currentPage + 1
+                                    : pageNumbers.length,
+                            )
+                        }
                         isDisabled={currentPage === pageNumbers.length}
                     />
                 </PaginationItem>

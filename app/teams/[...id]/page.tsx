@@ -1,8 +1,8 @@
-import TeamInfo from "@/app/_components/teams/TeamInfo";
-import { NextPage } from "next";
+import TeamInfo from '@/app/_components/teams/TeamInfo';
+import { NextPage } from 'next';
 
 const TeamsInfoPage: NextPage = () => {
-    return <TeamInfo />
-}
+    return <TeamInfo />;
+};
 
-export default TeamsInfoPage
+export default TeamsInfoPage;

@@ -29,12 +29,12 @@ import { addDoc, collection } from 'firebase/firestore';
 import { formSchema } from './workspaceFormSchema';
 import { db } from '@/app/_firebase/init';
 import EmojiPicker from '../shared/EmojiPicker';
-import {format} from "date-fns";
+import { format } from 'date-fns';
 import { useAuth } from '@/app/_hooks/useAuth';
 
 const CreateWorkspaceModal: FC = () => {
     const [selectedEmoji, setSelectedEmoji] = useState<string>('');
-    const {currentUser} = useAuth();
+    const { currentUser } = useAuth();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -58,7 +58,7 @@ const CreateWorkspaceModal: FC = () => {
                 emoji: values.emoji,
                 isPublic: values.isPublic,
                 createdAt: format(new Date(), 'yyyy-MM-dd'),
-                creatorId: currentUser?.uid
+                creatorId: currentUser?.uid,
             });
 
             toast({
@@ -80,9 +80,7 @@ const CreateWorkspaceModal: FC = () => {
 
     return (
         <Dialog>
-            <DialogTrigger>
-                New Workspace
-            </DialogTrigger>
+            <DialogTrigger>New Workspace</DialogTrigger>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle className='text-3xl font-bold dark:text-blue-50'>
@@ -114,12 +112,12 @@ const CreateWorkspaceModal: FC = () => {
                                     </FormItem>
                                 )}
                             />
-                            
+
                             <FormItem>
                                 <FormLabel>Workspace Logo</FormLabel>
                                 <div className='flex items-center space-x-4'>
                                     <EmojiPicker getValue={handleEmojiSelect}>
-                                        <div className='text-2xl cursor-pointer'>
+                                        <div className='cursor-pointer text-2xl'>
                                             {selectedEmoji || 'Select an emoji'}
                                         </div>
                                     </EmojiPicker>
@@ -142,7 +140,7 @@ const CreateWorkspaceModal: FC = () => {
                                         <FormLabel>Public Workspace</FormLabel>
                                         <FormControl>
                                             <Checkbox
-                                                className="size-3 ml-5"
+                                                className='ml-5 size-3'
                                                 checked={field.value}
                                                 onCheckedChange={(checked) =>
                                                     field.onChange(!!checked)
